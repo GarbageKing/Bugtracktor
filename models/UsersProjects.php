@@ -32,8 +32,8 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'id_projects', 'is_creator'], 'required'],
-            [['id_user', 'id_projects', 'is_creator'], 'integer'],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_user' => 'id']],
+            [[/*'id_user', */'id_projects', 'is_creator'], 'integer'],
+            //[['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['id_projects'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['id_projects' => 'id']],
         ];
     }
@@ -66,4 +66,30 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Projects::className(), ['id' => 'id_projects']);
     }
+    
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($this->isNewRecord && ctype_digit($this->id_user))
+            { 
+                
+            $Users = Users::find()->where(['username' => $this->id_user])->all();
+            
+            $ids = [];
+            
+            foreach($Users as $user)
+            {
+                $ids[] = $user['id'];
+            }
+                
+            $this->id_user = $ids[0];
+            //$this->is_creator = 0;
+            
+            //echo $this->id_user; die;
+            }
+            return parent::beforeSave($insert);
+        }
+    }
+    
 }

@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\Projects;
+use app\models\Users;
+
 /**
  * UsersProjectsController implements the CRUD actions for UsersProjects model.
  */
@@ -67,9 +70,20 @@ class UsersProjectsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        } else {            
+
+            $UsersProjects = UsersProjects::find()->where(['id_user' => Yii::$app->user->getId()])->all();
+            $ids = [];
+            
+            foreach($UsersProjects as $project)
+            {
+                $ids[] = $project['id_projects'];
+            }
+            
             return $this->render('create', [
                 'model' => $model,
+                'projects' => Projects::find()->where(['id' => $ids])->all(),
+                //'users' => Users::find()->all()
             ]);
         }
     }

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\models\Issues;
 /**
  * UsersIssuesController implements the CRUD actions for UsersIssues model.
  */
@@ -67,9 +68,19 @@ class UsersIssuesController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        } else {            
+            
+            $UsersIssues = UsersIssues::find()->where(['id_user' => Yii::$app->user->getId()])->all();
+            $ids = [];
+            
+            foreach($UsersIssues as $issue)
+            {
+                $ids[] = $issue['id_issue'];
+            }
+            
             return $this->render('create', [
                 'model' => $model,
+                'issues' => Issues::find()->where(['id' => $ids])->all(),
             ]);
         }
     }

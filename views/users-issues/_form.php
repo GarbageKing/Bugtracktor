@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UsersIssues */
@@ -14,9 +15,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_issue')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_issue')->dropDownList(
+        ArrayHelper::map($issues, 'id', 'name')
+    ) ?>
 
-    <?= $form->field($model, 'is_creator')->textInput() ?>
+    <?= $form->field($model, 'is_creator')->hiddenInput(['value' => '0']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

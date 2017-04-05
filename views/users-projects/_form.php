@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UsersProjects */
@@ -12,11 +13,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) 
+    
+    //$form->field($model, 'id_user')->textInput(['value' => Users::findOne(['username' => ]['id'])])
+    ?>
 
-    <?= $form->field($model, 'id_projects')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_projects')->dropDownList(
+        ArrayHelper::map($projects, 'id', 'name')
+    )  ?>
 
-    <?= $form->field($model, 'is_creator')->textInput() ?>
+    <?= $form->field($model, 'is_creator')->hiddenInput(['value' => '0']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
