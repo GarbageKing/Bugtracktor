@@ -39,6 +39,11 @@ class UsersProjectsController extends Controller
     public function actionIndex()
     {
         $searchModel = new UsersProjectsSearch();
+        
+        $searchModel->id_user = Yii::$app->user->getId();
+        
+        $searchModel->is_creator = 1;
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -72,7 +77,7 @@ class UsersProjectsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {            
 
-            $UsersProjects = UsersProjects::find()->where(['id_user' => Yii::$app->user->getId()])->all();
+            $UsersProjects = UsersProjects::find()->where(['id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->all();
             $ids = [];
             
             foreach($UsersProjects as $project)
@@ -80,11 +85,13 @@ class UsersProjectsController extends Controller
                 $ids[] = $project['id_projects'];
             }
             
+            //if(){
             return $this->render('create', [
                 'model' => $model,
                 'projects' => Projects::find()->where(['id' => $ids])->all(),
                 //'users' => Users::find()->all()
             ]);
+            //}
         }
     }
 

@@ -71,9 +71,9 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         if(parent::beforeSave($insert))
         {
-            if($this->isNewRecord && ctype_digit($this->id_user))
+            if($this->isNewRecord && preg_match("/[a-z]/i", $this->id_user))
             { 
-                
+                //echo $this->id_user; die;
             $Users = Users::find()->where(['username' => $this->id_user])->all();
             
             $ids = [];
