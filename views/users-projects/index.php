@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsersProjectsSearch */
@@ -12,11 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-projects-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Your Projects</h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Users Projects', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Attach User to Project', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Project', ['/projects/create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,10 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'id_user',
-            'id_projects',
-            'is_creator',
+            //'id',
+            //'id_user',
+            //'id_projects',             
+            [
+                      'attribute' => 'id_projects',                
+                      
+                      'value' => 'idProjects.name',
+            ],
+            //'is_creator',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

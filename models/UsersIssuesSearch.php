@@ -18,7 +18,8 @@ class UsersIssuesSearch extends UsersIssues
     public function rules()
     {
         return [
-            [['id', 'id_user', 'id_issue', 'is_creator'], 'integer'],
+            [['id', 'id_user', /*'id_issue',*/ 'is_creator'], 'integer'],
+            [['id_issue', 'name'], 'safe'],
         ];
     }
 
@@ -42,6 +43,7 @@ class UsersIssuesSearch extends UsersIssues
     {
         $query = UsersIssues::find();
 
+        $query->joinWith(['idIssue']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -60,9 +62,11 @@ class UsersIssuesSearch extends UsersIssues
         $query->andFilterWhere([
             'id' => $this->id,
             'id_user' => $this->id_user,
-            'id_issue' => $this->id_issue,
+            //'id_issue' => $this->id_issue,
             'is_creator' => $this->is_creator,
-        ]);
+        ])
+                
+        ->andFilterWhere(['like', 'issues.name', $this->id_issue]);
 
         return $dataProvider;
     }

@@ -45,10 +45,11 @@ class UsersProjectsController extends Controller
         $searchModel->is_creator = 1;
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider,            
         ]);
     }
 
@@ -108,8 +109,18 @@ class UsersProjectsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            
+            $UsersProjects = UsersProjects::find()->where(['id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->all();
+            $ids = [];
+            
+            foreach($UsersProjects as $project)
+            {
+                $ids[] = $project['id_projects'];
+            }
+            
             return $this->render('update', [
                 'model' => $model,
+                'projects' => Projects::find()->where(['id' => $ids])->all(),
             ]);
         }
     }

@@ -1,7 +1,11 @@
 <?php
+
 use yii\helpers\Html;
+
+
 /* @var $this yii\web\View */
 /* @var $model app\models\UsersIssues */
+
 $this->title = 'Create Users Issues';
 $this->params['breadcrumbs'][] = ['label' => 'Users Issues', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

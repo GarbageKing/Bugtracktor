@@ -37,6 +37,11 @@ class UsersIssuesController extends Controller
     public function actionIndex()
     {
         $searchModel = new UsersIssuesSearch();
+        
+        $searchModel->id_user = Yii::$app->user->getId();
+        
+        $searchModel->is_creator = 1;
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

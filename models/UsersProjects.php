@@ -35,6 +35,7 @@ class UsersProjects extends \yii\db\ActiveRecord
             [[/*'id_user', */'id_projects', 'is_creator'], 'integer'],
             //[['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_user' => 'id']],
             [['id_projects'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['id_projects' => 'id']],
+            //[['name_project'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['name' => 'id']],
         ];
     }
 
@@ -66,7 +67,7 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Projects::className(), ['id' => 'id_projects']);
     }
-    
+   
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert))

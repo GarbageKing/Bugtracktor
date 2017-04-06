@@ -11,14 +11,16 @@ use app\models\UsersProjects;
  * UsersProjectsSearch represents the model behind the search form about `app\models\UsersProjects`.
  */
 class UsersProjectsSearch extends UsersProjects
-{
+{ 
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'id_user', 'id_projects', 'is_creator'], 'integer'],
+            [['id', 'id_user', /*'id_projects',*/ 'is_creator'], 'integer'],
+            [['id_projects', 'name'], 'safe'],
         ];
     }
 
@@ -41,7 +43,9 @@ class UsersProjectsSearch extends UsersProjects
     public function search($params)
     {
         $query = UsersProjects::find();
-
+        
+        $query->joinWith(['idProjects']);
+        
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -60,9 +64,13 @@ class UsersProjectsSearch extends UsersProjects
         $query->andFilterWhere([
             'id' => $this->id,
             'id_user' => $this->id_user,
-            'id_projects' => $this->id_projects,
-            'is_creator' => $this->is_creator,
-        ]);
+            //'id_projects' => $this->id_projects,
+            'is_creator' => $this->is_creator, 
+            //'name' => $idProjects->name,
+            
+        ])
+        
+        ->andFilterWhere(['like', 'projects.name', $this->id_projects]);
 
         return $dataProvider;
     }

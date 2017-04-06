@@ -42,6 +42,8 @@ class IssuesSearch extends Issues
     public function search($params)
     {
         $query = Issues::find();
+        
+        //$query->joinWith(['usersIssues']);
 
         // add conditions that should always apply here
 
