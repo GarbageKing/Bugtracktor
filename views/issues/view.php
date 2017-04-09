@@ -14,7 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    
+    
+    <div id="issue-info" class="row">
+        
+        <div class="col-md-9">
+        <p>Created: <?php echo $model->cr_date; ?></p>
+        <p><?php echo $model->description; ?></p>
+        </div>
+        <div class="col-md-3">
+            <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -23,19 +32,39 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'id_project',
-            'name',
-            'description',
-            'priority',
-            'status',
-            'cr_date',
-        ],
-    ]) ?>
-
+        </p>
+            <p><h3>Priority</h3>
+            <?php if($model->priority == 0)
+                    $priority = 'Low';
+                 if($model->priority == 1)
+                    $priority = 'Medium';
+                 if($model->priority == 2)
+                    $priority = 'High';
+                 echo $priority;
+            ?>
+            </p>
+        <p><h3>Status</h3>
+            <?php if($model->status == 0)
+                    $status = 'Closed';
+                 if($model->status == 1)
+                    $status = 'Open';
+                 echo $status;
+            ?>
+        </p>
+        </div>
+    </div>
+    
+  
+<p>
+    <h3>Attached users:</h3> <br>
+    <?php 
+        
+        $namesToShow = '';
+        foreach ($usernames as $username)
+        {           
+        $namesToShow .= $username . ', ';    
+        }
+        echo substr($namesToShow, 0, -2);
+        ?>
+</p>
 </div>

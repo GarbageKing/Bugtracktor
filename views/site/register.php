@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'cr_date')->textInput() ?>
+    <?= $form->field($model, 'cr_date')->hiddenInput() ?>
     
-    <?= $form->field($model, 'auth_key')->textInput() ?>
+    <?= $form->field($model, 'auth_key')->hiddenInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

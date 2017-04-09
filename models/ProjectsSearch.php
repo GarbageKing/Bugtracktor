@@ -43,6 +43,10 @@ class ProjectsSearch extends Projects
     {
         $query = Projects::find();
 
+        $query->join('JOIN',
+                'users_projects as pp',
+				'pp.id_projects = projects.id')
+                ->where('pp.id_user='.Yii::$app->user->getId());
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

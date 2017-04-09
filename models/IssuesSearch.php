@@ -18,8 +18,8 @@ class IssuesSearch extends Issues
     public function rules()
     {
         return [
-            [['id', 'id_project', 'priority', 'status'], 'integer'],
-            [['name', 'description', 'cr_date'], 'safe'],
+            [['id', /*'id_project',*/ 'priority', 'status'], 'integer'],
+            [['name', 'description', 'cr_date', 'id_project'], 'safe'],
         ];
     }
 
@@ -43,7 +43,11 @@ class IssuesSearch extends Issues
     {
         $query = Issues::find();
         
-        //$query->joinWith(['usersIssues']);
+        $query->joinWith(['idProject'])
+                ->join('JOIN',
+                'users_issues as uu',
+				'uu.id_issue = issues.id')
+                ->where('uu.id_user='.Yii::$app->user->getId());
 
         // add conditions that should always apply here
 
@@ -61,15 +65,16 @@ class IssuesSearch extends Issues
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'id_project' => $this->id_project,
+            'issues.id' => $this->id,
+            //'id_project' => $this->id_project,
             'priority' => $this->priority,
             'status' => $this->status,
             'cr_date' => $this->cr_date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'issues.name', $this->name])
+            ->andFilterWhere(['like', 'issues.description', $this->description])
+                ->andFilterWhere(['like', 'projects.name', $this->id_project]);
 
         return $dataProvider;
     }

@@ -12,6 +12,8 @@ use app\models\Projects;
 
 use app\models\UsersProjects;
 use app\models\UsersIssues;
+use app\models\Users;
+use yii\filters\AccessControl;
 
 /**
  * IssuesController implements the CRUD actions for Issues model.
@@ -24,6 +26,17 @@ class IssuesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -41,14 +54,16 @@ class IssuesController extends Controller
     {
         $searchModel = new IssuesSearch();
         
-            /*$UsersIssues = UsersIssues::find()->where(['id_user' => Yii::$app->user->getId()])->all();
+           /* $UsersIssues = UsersIssues::find()->where(['id_user' => Yii::$app->user->getId()])->all();
             $ids = [];
             
             foreach($UsersIssues as $issue)
             {
                 $ids[] = $issue['id_issue'];
             }
-         $searchModel->id = $ids[0];*/
+            
+         if(!empty($ids))
+         $searchModel->id = $ids;*/
         
         //$searchModel->is_creator = 1;
         
@@ -67,8 +82,25 @@ class IssuesController extends Controller
      */
     public function actionView($id)
     {
+        
+        $usersAttached = UsersIssues::find()->where(['id_issue' => $id])->all();
+        $users = [];
+        $actualUsernames = [];
+        
+        foreach($usersAttached as $user)
+            {
+                $users[] = $user['id_user'];
+            }
+            
+        foreach($users as $user)
+        {
+        $actualUsr = Users::find()->where(['id' => $user])->one();
+        $actualUsernames[] = $actualUsr['username'];
+        }
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'usernames' => $actualUsernames,
         ]);
     }
 
@@ -160,7 +192,9 @@ class IssuesController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Issues::findOne($id)) !== null) {
+        $exists = UsersIssues::find()->where( [ 'id_issue' => $id, 'id_user' => Yii::$app->user->getId() ] )->exists();
+        
+        if (($model = Issues::findOne($id)) !== null && $exists) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

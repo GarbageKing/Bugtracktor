@@ -9,7 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UsersProjects;
+use yii\filters\AccessControl;
 
+use app\models\Users;
 /**
  * ProjectsController implements the CRUD actions for Projects model.
  */
@@ -21,6 +23,17 @@ class ProjectsController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -52,8 +65,25 @@ class ProjectsController extends Controller
      */
     public function actionView($id)
     {
+        
+        $usersAttached = UsersProjects::find()->where(['id_projects' => $id])->all();
+        $users = [];
+        $actualUsernames = [];
+        
+        foreach($usersAttached as $user)
+            {
+                $users[] = $user['id_user'];
+            }
+            
+        foreach($users as $user)
+        {
+        $actualUsr = Users::find()->where(['id' => $user])->one();
+        $actualUsernames[] = $actualUsr['username'];
+        }
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'usernames' => $actualUsernames,
         ]);
     }
 
@@ -125,7 +155,9 @@ class ProjectsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Projects::findOne($id)) !== null) {
+        $exists = UsersProjects::find()->where( [ 'id_projects' => $id, 'id_user' => Yii::$app->user->getId() ] )->exists();
+        
+        if (($model = Projects::findOne($id)) !== null && $exists) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

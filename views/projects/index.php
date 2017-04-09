@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Projects', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Attach user to a project', ['/users-projects/create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
-            'cr_date',
+            //'cr_date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

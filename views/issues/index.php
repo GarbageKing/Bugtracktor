@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Issues', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Issue', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Attach user to an issue', ['/users-issues/create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,15 +25,43 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'id_project',
+            //'id',
+            //'id_project',
+            
             'name',
             'description',
-            'priority',
-            // 'status',
-            // 'cr_date',
-            'usersIssues.id_user',
+            [
+                        'label' => 'Project',
+                      'attribute' => 'id_project',                
+                      
+                      'value' => 'idProject.name',
+            ],
             
+            'priority' =>[
+                'label' => 'Priority',
+               'value' => function($model) {
+        $pr = '';
+        if($model->priority == 0)
+        { $pr = 'Low'; }
+        if($model->priority == 1)
+        { $pr = 'Medium'; }
+        if($model->priority == 2)
+        { $pr = 'High'; }
+            
+    return $pr;
+},
+ 
+            ],
+// => ['format' =>[0=>'Low', 1=>'Medium', 2=>'High']],
+             'status'=>
+            [
+                'label' => 'Status',
+               'value' => function($model) {
+    return $model->status == 1 ? 'Open' : 'Closed';
+}
+ 
+            ],
+                      
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -128,11 +128,11 @@ class SiteController extends Controller
     {
         $model = new Users();
 
-        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
             //$model->password = Yii::$app->security->generatePasswordHash($model->password);
             //$model->auth_key = Yii::$app->security->generateRandomString();
-            $model->save();
+            //$model->save();
             //print_r($model); die;
             return $this->redirect(/*['view', 'id' => $model->id]*/'');
         } else {

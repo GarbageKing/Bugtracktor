@@ -143,12 +143,25 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
     {
         if(parent::beforeSave($insert))
         {
+            $exists = Users::find()->where( [ 'username' => $this->username ] )->exists();
+            $exists2 = Users::find()->where( [ 'email' => $this->email ] )->exists();
+            if($exists){                
+                echo '<script>alert("User with this username already exists");</script>';
+                return;
+            }
+            if($exists2){
+                echo '<script>alert("User with this email already exists");</script>';
+                return;
+            }
+            
             if($this->isNewRecord)
             { 
             $this->password = Yii::$app->security->generatePasswordHash($this->password);
             $this->auth_key = Yii::$app->security->generateRandomString();
             }
             return parent::beforeSave($insert);
+            
+            
         }
     }
     

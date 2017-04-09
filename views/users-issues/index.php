@@ -1,12 +1,9 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsersIssuesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Users Issues';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -24,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             //'id',
             //'id_user',
             //'id_issue',
@@ -35,7 +31,31 @@ $this->params['breadcrumbs'][] = $this->title;
                       
                       'value' => 'idIssue.name',
             ],
-
+            
+            [
+                      //'attribute' => 'id_project',                
+                      
+                      'value' => 'idIssue.description',
+            ],
+            
+            [
+                      //'attribute' => 'id_project',                
+                      
+                      'value' => 'idIssue.id_project',
+            ],
+            
+            [
+                      //'attribute' => 'id_project',                
+                      
+                      'value' => 'idIssue.priority',
+            ],
+            
+            [
+                      //'attribute' => 'id_project',                
+                      
+                      'value' => 'idIssue.status',
+            ],
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
