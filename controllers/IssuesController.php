@@ -111,11 +111,11 @@ class IssuesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Issues();
-        $model2 = new UsersIssues();
+        $model = new Issues();        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
+            $model2 = new UsersIssues();
             $model2->id_issue = $model->id;
             $model2->id_user = Yii::$app->user->getId();
             $model2->is_creator = 1;

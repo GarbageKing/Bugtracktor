@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use app\models\Issues;
+use app\models\UsersProjects;
 /**
  * UsersIssuesController implements the CRUD actions for UsersIssues model.
  */
@@ -72,6 +73,17 @@ class UsersIssuesController extends Controller
         $model = new UsersIssues();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            $id_user_issue = $model->id_issue;
+            $issue = Issues::find()->where(['id' => $id_user_issue])->one();
+            $id_project = $issue['id_project'];
+            
+            $model2 = new UsersProjects();
+            $model2->id_projects = $id_project;
+            $model2->id_user = $model->id_user;
+            $model2->is_creator = 0;
+            $model2->save();
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {            
             
