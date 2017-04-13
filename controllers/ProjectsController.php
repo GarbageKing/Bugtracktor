@@ -12,6 +12,7 @@ use app\models\UsersProjects;
 use yii\filters\AccessControl;
 
 use app\models\Users;
+use app\models\Issues;
 /**
  * ProjectsController implements the CRUD actions for Projects model.
  */
@@ -141,8 +142,22 @@ class ProjectsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        if(Yii::$app->db->createCommand()->delete('users_projects', ['id_projects' => $id, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->execute()){
+            
+            Yii::$app->db->createCommand()->delete('users_projects', ['id_projects' => $id])->execute(); 
+            
+            $Issues = Issues::find()->where(['id_project' => $id])->all();
+                        
+            foreach($Issues as $issue)
+            {
+                Yii::$app->db->createCommand()->delete('users_issues', ['id_issue' => $issue['id']])->execute();               
+            }
+            
+                Yii::$app->db->createCommand()->delete('issues', ['id_project' => $id])->execute();
+                                                                                       
+                Yii::$app->db->createCommand()->delete('projects', ['id' => $id])->execute(); 
+        
+        }
         return $this->redirect(['index']);
     }
 

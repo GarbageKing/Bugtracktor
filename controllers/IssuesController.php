@@ -177,9 +177,11 @@ class IssuesController extends Controller
      * @return mixed
      */
     public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
+    {        
+        if(Yii::$app->db->createCommand()->delete('users_issues', ['id_issue' => $id, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->execute()){
+               Yii::$app->db->createCommand()->delete('users_issues', ['id_issue' => $id])->delete('issues', ['id' => $id])->execute(); 
+        
+        }
         return $this->redirect(['index']);
     }
 
