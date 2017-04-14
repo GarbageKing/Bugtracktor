@@ -132,6 +132,7 @@ class IssuesController extends Controller
                 $ids[] = $project['id_projects'];
             }
             
+           // print_r($ids); die;
             
             return $this->render('create', [
                 'model' => $model,

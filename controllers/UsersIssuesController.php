@@ -87,7 +87,7 @@ class UsersIssuesController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {            
             
-            $UsersIssues = UsersIssues::find()->where(['id_user' => Yii::$app->user->getId()])->all();
+            $UsersIssues = UsersIssues::find()->where(['id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->all();
             $ids = [];
             
             foreach($UsersIssues as $issue)

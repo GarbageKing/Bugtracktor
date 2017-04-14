@@ -124,13 +124,17 @@ class ProjectsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        
+        $isCreator = UsersProjects::find()->where([ 'id_projects' => $id, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->exists();
+        
+        if ($model->load(Yii::$app->request->post()) && $isCreator) {
+            
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return $this->redirect(['view', 'id' => $model->id]);//->render('update', [
+                //'model' => $model,
+           // ]);
         }
     }
 
