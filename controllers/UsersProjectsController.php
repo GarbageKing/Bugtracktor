@@ -73,7 +73,19 @@ class UsersProjectsController extends Controller
     public function actionCreate()
     {
         $model = new UsersProjects();
-
+        
+        if($model->load(Yii::$app->request->post()) && array_key_exists('delete-linking', Yii::$app->request->post())){            
+            
+            $userid = Users::find()->where(['username' => $model->id_user])->one()['id'];
+            
+            Yii::$app->db->createCommand()
+                    ->delete('users_projects', ['id_projects' => $model->id_projects, 'id_user' => $userid, 'is_creator' => 0])
+                    ->execute();     
+            
+            return $this->goBack();
+        }
+        
+        else {
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {            
@@ -93,6 +105,7 @@ class UsersProjectsController extends Controller
                 //'users' => Users::find()->all()
             ]);
             //}
+        }
         }
     }
 

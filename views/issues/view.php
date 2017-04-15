@@ -67,4 +67,5 @@ $this->params['breadcrumbs'][] = $this->title;
         echo substr($namesToShow, 0, -2);
         ?>
 </p>
+
 </div>

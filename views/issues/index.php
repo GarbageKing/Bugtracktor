@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Issue', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Attach user to an issue', ['/users-issues/create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Manage user connections', ['/users-issues/create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -26,6 +26,7 @@ use yii\helpers\ArrayHelper;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Delete', ['class' => 'btn btn-danger',  'name' => 'delete-linking']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

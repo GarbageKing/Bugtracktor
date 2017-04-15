@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 
 use app\models\Issues;
 use app\models\UsersProjects;
+use app\models\Users;
 /**
  * UsersIssuesController implements the CRUD actions for UsersIssues model.
  */
@@ -71,9 +72,21 @@ class UsersIssuesController extends Controller
     public function actionCreate()
     {
         $model = new UsersIssues();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        
+        
+        if($model->load(Yii::$app->request->post()) && array_key_exists('delete-linking', Yii::$app->request->post())){            
             
+            $userid = Users::find()->where(['username' => $model->id_user])->one()['id'];
+            
+            Yii::$app->db->createCommand()
+                    ->delete('users_issues', ['id_issue' => $model->id_issue, 'id_user' => $userid, 'is_creator' => 0])
+                    ->execute();     
+            
+            return $this->goBack();
+        }
+        
+        else {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {            
             $id_user_issue = $model->id_issue;
             $issue = Issues::find()->where(['id' => $id_user_issue])->one();
             $id_project = $issue['id_project'];
@@ -99,6 +112,7 @@ class UsersIssuesController extends Controller
                 'model' => $model,
                 'issues' => Issues::find()->where(['id' => $ids])->all(),
             ]);
+        }
         }
     }
 
@@ -129,8 +143,8 @@ class UsersIssuesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $this->findModel($id)->delete();       
+        
         return $this->redirect(['index']);
     }
 
