@@ -53,7 +53,7 @@ class Issues extends \yii\db\ActiveRecord
             'id_project' => 'Id Project',
             'name' => 'Name',
             'description' => 'Description',
-            'priority' => 'Priority',
+            'priority' => 'Type',
             'status' => 'Status',
             'cr_date' => 'Cr Date',
         ];

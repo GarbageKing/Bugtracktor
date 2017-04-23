@@ -32,10 +32,8 @@ class UsersIssues extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'id_issue', 'is_creator'], 'required'],
-            [[/*'id_user',*/ 'id_issue', 'is_creator'], 'integer'],
-            //[['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_user' => 'id']],
-            [['id_issue'], 'exist', 'skipOnError' => true, 'targetClass' => Issues::className(), 'targetAttribute' => ['id_issue' => 'id']],
-            //[['id_project'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['issues.id_project' => 'id']],
+            [['id_issue', 'is_creator'], 'integer'],            
+            [['id_issue'], 'exist', 'skipOnError' => true, 'targetClass' => Issues::className(), 'targetAttribute' => ['id_issue' => 'id']],            
         ];
     }
 
@@ -67,17 +65,7 @@ class UsersIssues extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Issues::className(), ['id' => 'id_issue']);
     }
-    
-    /*public function getIdProject()
-    {
-        return $this->hasOne(Projects::className(), ['id' => 'id']);
-    }*/
-    
-    //public function getUsersProjects()
-    //{
-    //    return $this->hasOne(UsersProjects::className(), ['id' => 'id_projects'  ]);
-    //}
-    
+        
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert))
@@ -95,9 +83,7 @@ class UsersIssues extends \yii\db\ActiveRecord
             }
                 
             $this->id_user = $ids[0];
-            //$this->is_creator = 0;
             
-            //echo $this->id_user; die;
             }
             return parent::beforeSave($insert);
         }

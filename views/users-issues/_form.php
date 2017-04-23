@@ -15,12 +15,6 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_issue')->dropDownList(
-        ArrayHelper::map($issues, 'id', 'name')
-    ) ?>
-
-    <?= $form->field($model, 'is_creator')->hiddenInput(['value' => '0']) ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::submitButton('Delete', ['class' => 'btn btn-danger',  'name' => 'delete-linking']) ?>

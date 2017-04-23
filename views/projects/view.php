@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <p><?= Html::a('Manage user connections', ['/users-projects/create'], ['class' => 'btn btn-success']) ?></p>
     </div>
 </div>
         

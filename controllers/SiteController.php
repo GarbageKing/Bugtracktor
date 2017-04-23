@@ -7,7 +7,6 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\Users;
 
 class SiteController extends Controller
@@ -95,34 +94,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-
-    /**
-     * Displays contact page.
-     *
-     * @return string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
     
     public function actionRegister()
     {
@@ -130,10 +101,6 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
-            //$model->password = Yii::$app->security->generatePasswordHash($model->password);
-            //$model->auth_key = Yii::$app->security->generateRandomString();
-            //$model->save();
-            //print_r($model); die;
             return $this->redirect(/*['view', 'id' => $model->id]*/'');
         } else {
             return $this->render('register', [

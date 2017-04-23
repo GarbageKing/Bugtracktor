@@ -47,6 +47,12 @@ $config = [
         ],
         */
     ],
+	'modules' => [
+          'redactor' => 'yii\redactor\RedactorModule',
+		  'class' => 'yii\redactor\RedactorModule',
+          'uploadDir' => '@webroot/uploads',
+          'uploadUrl' => '/uploads',
+      ],
     'params' => $params,
 ];
 

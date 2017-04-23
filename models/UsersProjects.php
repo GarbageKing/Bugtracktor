@@ -32,10 +32,8 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         return [
             [['id_user', 'id_projects', 'is_creator'], 'required'],
-            [[/*'id_user', */'id_projects', 'is_creator'], 'integer'],
-            //[['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id_user' => 'id']],
-            [['id_projects'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['id_projects' => 'id']],
-            //[['name_project'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['name' => 'id']],
+            [['id_projects', 'is_creator'], 'integer'],            
+            [['id_projects'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['id_projects' => 'id']],            
         ];
     }
 
@@ -74,7 +72,7 @@ class UsersProjects extends \yii\db\ActiveRecord
         {
             if($this->isNewRecord && preg_match("/[a-z]/i", $this->id_user))
             { 
-                //echo $this->id_user; die;
+                
             $Users = Users::find()->where(['username' => $this->id_user])->all();
             
             $ids = [];
@@ -85,9 +83,7 @@ class UsersProjects extends \yii\db\ActiveRecord
             }
                 
             $this->id_user = $ids[0];
-            //$this->is_creator = 0;
             
-            //echo $this->id_user; die;
             }
             return parent::beforeSave($insert);
         }

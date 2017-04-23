@@ -16,8 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Projects', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Manage user connections', ['/users-projects/create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Projects', ['create'], ['class' => 'btn btn-success']) ?>        
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

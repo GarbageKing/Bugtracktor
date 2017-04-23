@@ -13,16 +13,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) 
-    
-    //$form->field($model, 'id_user')->textInput(['value' => Users::findOne(['username' => ]['id'])])
-    ?>
-
-    <?= $form->field($model, 'id_projects')->dropDownList(
-        ArrayHelper::map($projects, 'id', 'name')
-    )  ?>
-
-    <?= $form->field($model, 'is_creator')->hiddenInput(['value' => '0']) ?>
+    <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

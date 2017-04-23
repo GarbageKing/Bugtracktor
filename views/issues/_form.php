@@ -22,22 +22,21 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::className()) ?>
 
     <?= $form->field($model, 'priority')->dropDownList([
-    '0' => 'Low',
-    '1' => 'Medium',
-    '2'=>'High'
+    '0' => 'Bug[Low]',
+    '1' => 'Bug[Medium]',
+    '2' => 'Bug[High]',
+    '3' => 'Task[Low]',
+    '4' => 'Task[Medium]',
+    '5' => 'Task[High]'
 ]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
     '0' => 'Closed',
     '1' => 'Open'    
 ]) ?>
-
-    
-    
-    <?= $form->field($model, 'cr_date')->hiddenInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

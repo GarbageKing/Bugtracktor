@@ -36,7 +36,7 @@ class UsersProjectsController extends Controller
      * Lists all UsersProjects models.
      * @return mixed
      */
-    public function actionIndex()
+   /* public function actionIndex()
     {
         $searchModel = new UsersProjectsSearch();
         
@@ -51,7 +51,7 @@ class UsersProjectsController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,            
         ]);
-    }
+    }*/
 
     /**
      * Displays a single UsersProjects model.
@@ -86,25 +86,33 @@ class UsersProjectsController extends Controller
         }
         
         else {
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if(Yii::$app->session['idproject'])
+            {$model->id_projects = Yii::$app->session['idproject'];}
+            else 
+            {$model->id_projects = '';}
+            $model->is_creator = 0;
+            
+            $model->save();
+            
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {            
-
-            $UsersProjects = UsersProjects::find()->where(['id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->all();
-            $ids = [];
+        } else {    
             
-            foreach($UsersProjects as $project)
-            {
-                $ids[] = $project['id_projects'];
-            }
+            $arr = explode('id=', Yii::$app->request->referrer);
+            $ids = $arr[1];
+            Yii::$app->session['idproject'] = $ids;
             
-            //if(){
+            $exists = UsersProjects::find()->where( [ 'id_projects' => $ids, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1 ] )->exists();
+            
+            if($exists){
             return $this->render('create', [
                 'model' => $model,
-                'projects' => Projects::find()->where(['id' => $ids])->all(),
-                //'users' => Users::find()->all()
+                'projects' => $ids,                
             ]);
-            //}
+            }
+            else 
+                {return $this->goBack();}
         }
         }
     }

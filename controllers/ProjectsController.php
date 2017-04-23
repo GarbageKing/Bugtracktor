@@ -128,13 +128,13 @@ class ProjectsController extends Controller
         $isCreator = UsersProjects::find()->where([ 'id_projects' => $id, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->exists();
         
         if ($model->load(Yii::$app->request->post()) && $isCreator) {
-            
+            //echo 'aga'; die;
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->redirect(['view', 'id' => $model->id]);//->render('update', [
-                //'model' => $model,
-           // ]);
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
     }
 

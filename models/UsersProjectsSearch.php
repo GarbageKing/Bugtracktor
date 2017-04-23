@@ -19,7 +19,7 @@ class UsersProjectsSearch extends UsersProjects
     public function rules()
     {
         return [
-            [['id', 'id_user', /*'id_projects',*/ 'is_creator'], 'integer'],
+            [['id', 'id_user', 'is_creator'], 'integer'],
             [['id_projects', 'name'], 'safe'],
         ];
     }
@@ -63,11 +63,8 @@ class UsersProjectsSearch extends UsersProjects
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_user' => $this->id_user,
-            //'id_projects' => $this->id_projects,
-            'is_creator' => $this->is_creator, 
-            //'name' => $idProjects->name,
-            
+            'id_user' => $this->id_user,            
+            'is_creator' => $this->is_creator,           
         ])
         
         ->andFilterWhere(['like', 'projects.name', $this->id_projects]);

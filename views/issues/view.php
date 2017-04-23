@@ -31,15 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]) ?>        
         </p>
-            <p><h3>Priority</h3>
+        <p><?= Html::a('Manage user connections', ['/users-issues/create'], ['class' => 'btn btn-success']) ?></p>
+            <p><h3>Type</h3>
             <?php if($model->priority == 0)
-                    $priority = 'Low';
+                    $priority = 'Bug[Low]';
                  if($model->priority == 1)
-                    $priority = 'Medium';
+                    $priority = 'Bug[Medium]';
                  if($model->priority == 2)
-                    $priority = 'High';
+                    $priority = 'Bug[High]';
+                 if($model->priority == 3)
+                    $priority = 'Task[Low]';
+                 if($model->priority == 4)
+                    $priority = 'Task[Medium]';
+                 if($model->priority == 5)
+                    $priority = 'Task[High]';
                  echo $priority;
             ?>
             </p>

@@ -18,7 +18,7 @@ class IssuesSearch extends Issues
     public function rules()
     {
         return [
-            [['id', /*'id_project',*/ 'priority', 'status'], 'integer'],
+            [['id', 'priority', 'status'], 'integer'],
             [['name', 'description', 'cr_date', 'id_project'], 'safe'],
         ];
     }
@@ -65,8 +65,7 @@ class IssuesSearch extends Issues
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'issues.id' => $this->id,
-            //'id_project' => $this->id_project,
+            'issues.id' => $this->id,            
             'priority' => $this->priority,
             'status' => $this->status,
             'cr_date' => $this->cr_date,

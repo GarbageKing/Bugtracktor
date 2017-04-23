@@ -17,6 +17,7 @@ use app\models\Users;
  */
 class UsersIssuesController extends Controller
 {
+        
     /**
      * @inheritdoc
      */
@@ -36,7 +37,7 @@ class UsersIssuesController extends Controller
      * Lists all UsersIssues models.
      * @return mixed
      */
-    public function actionIndex()
+    /*public function actionIndex()
     {
         $searchModel = new UsersIssuesSearch();
         
@@ -50,7 +51,7 @@ class UsersIssuesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * Displays a single UsersIssues model.
@@ -71,8 +72,7 @@ class UsersIssuesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new UsersIssues();
-        
+        $model = new UsersIssues();           
         
         if($model->load(Yii::$app->request->post()) && array_key_exists('delete-linking', Yii::$app->request->post())){            
             
@@ -85,8 +85,19 @@ class UsersIssuesController extends Controller
             return $this->goBack();
         }
         
-        else {
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {            
+        else {             
+            
+        if ($model->load(Yii::$app->request->post())) {   
+                     
+            
+            if(Yii::$app->session['idissue'])
+            {$model->id_issue = Yii::$app->session['idissue'];}
+            else 
+            {$model->id_issue = '';}
+            $model->is_creator = 0;
+            
+            $model->save();
+            
             $id_user_issue = $model->id_issue;
             $issue = Issues::find()->where(['id' => $id_user_issue])->one();
             $id_project = $issue['id_project'];
@@ -99,19 +110,20 @@ class UsersIssuesController extends Controller
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {            
+                               
+            $arr = explode('id=', Yii::$app->request->referrer); 
+            $ids = $arr[1]; 
+            Yii::$app->session['idissue'] = $ids;            
             
-            $UsersIssues = UsersIssues::find()->where(['id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->all();
-            $ids = [];
+            $exists = UsersIssues::find()->where( [ 'id_issue' => $ids, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1 ] )->exists();
             
-            foreach($UsersIssues as $issue)
-            {
-                $ids[] = $issue['id_issue'];
-            }
-            
+            if($exists){
             return $this->render('create', [
                 'model' => $model,
-                'issues' => Issues::find()->where(['id' => $ids])->all(),
-            ]);
+                'issues' => $ids,
+            ]);}
+            else 
+            {return $this->goBack(); }  
         }
         }
     }
@@ -156,7 +168,7 @@ class UsersIssuesController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
-    {
+    {                      
         if (($model = UsersIssues::findOne($id)) !== null) {
             return $model;
         } else {
