@@ -70,6 +70,7 @@ class UsersIssues extends \yii\db\ActiveRecord
     {
         if(parent::beforeSave($insert))
         {
+            
             if($this->isNewRecord && preg_match("/[a-z]/i", $this->id_user))
             { 
                 
@@ -83,6 +84,12 @@ class UsersIssues extends \yii\db\ActiveRecord
             }
                 
             $this->id_user = $ids[0];
+            
+            $exists = UsersIssues::find()->where( [ 'id_user' => $this->id_user, 'id_issue' => Yii::$app->session['idissue'] ] )->exists();
+            
+            if($exists){                
+                die( '<script>alert("This user is already attached to this issue!"); window.location.href="?r=issues";</script>');                    
+            }            
             
             }
             return parent::beforeSave($insert);

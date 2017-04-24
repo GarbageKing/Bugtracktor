@@ -84,6 +84,12 @@ class UsersProjects extends \yii\db\ActiveRecord
                 
             $this->id_user = $ids[0];
             
+            $exists = UsersProjects::find()->where( [ 'id_user' => $this->id_user, 'id_projects' => Yii::$app->session['idproject'] ] )->exists();
+            
+            if($exists){                
+                die( '<script>alert("This user is already attached to this project!"); window.location.href="?r=projects";</script>');                    
+            }
+            
             }
             return parent::beforeSave($insert);
         }

@@ -88,8 +88,7 @@ class UsersIssuesController extends Controller
         else {             
             
         if ($model->load(Yii::$app->request->post())) {   
-                     
-            
+                                 
             if(Yii::$app->session['idissue'])
             {$model->id_issue = Yii::$app->session['idissue'];}
             else 
@@ -112,6 +111,8 @@ class UsersIssuesController extends Controller
         } else {            
                                
             $arr = explode('id=', Yii::$app->request->referrer); 
+            if(count($arr)<2)
+            {return;}
             $ids = $arr[1]; 
             Yii::$app->session['idissue'] = $ids;            
             

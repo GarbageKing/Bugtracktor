@@ -7,7 +7,7 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Hi There!</h1>
+        <h1>Hi There, <?php echo (Yii::$app->user->getId() ? Yii::$app->user->identity->username : '%username%');  ?>!</h1>
 
         <p class="lead"><?php echo 'You may proceed to' . (Yii::$app->user->getId() ? ' your stuff' : ' LogIn or SignUp');  ?></p>
     </div>

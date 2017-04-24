@@ -39,15 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'priority' =>[
                 'label' => 'Priority',
                'value' => function($model) {
-        $pr = '';
         if($model->priority == 0)
-        { $pr = 'Low'; }
-        if($model->priority == 1)
-        { $pr = 'Medium'; }
-        if($model->priority == 2)
-        { $pr = 'High'; }
-            
-    return $pr;
+                    $priority = 'Bug[Low]';
+                 if($model->priority == 1)
+                    $priority = 'Bug[Medium]';
+                 if($model->priority == 2)
+                    $priority = 'Bug[High]';
+                 if($model->priority == 3)
+                    $priority = 'Task[Low]';
+                 if($model->priority == 4)
+                    $priority = 'Task[Medium]';
+                 if($model->priority == 5)
+                    $priority = 'Task[High]';
+                 return $priority;
 },
  
             ],
