@@ -44,7 +44,7 @@ class UsersIssues extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_user' => 'Id User',
+            'id_user' => 'Username',
             'id_issue' => 'Id Issue',
             'is_creator' => 'Is Creator',
         ];

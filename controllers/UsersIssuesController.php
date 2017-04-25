@@ -79,10 +79,10 @@ class UsersIssuesController extends Controller
             $userid = Users::find()->where(['username' => $model->id_user])->one()['id'];
             
             Yii::$app->db->createCommand()
-                    ->delete('users_issues', ['id_issue' => $model->id_issue, 'id_user' => $userid, 'is_creator' => 0])
+                    ->delete('users_issues', ['id_issue' => Yii::$app->session['idissue'], 'id_user' => $userid, 'is_creator' => 0])
                     ->execute();     
             
-            return $this->goBack();
+            return '<script>alert("User has been detached!"); window.location.href="?r=issues";</script>';
         }
         
         else {             
@@ -124,7 +124,7 @@ class UsersIssuesController extends Controller
                 'issues' => $ids,
             ]);}
             else 
-            {return $this->goBack(); }  
+            {return '<script>alert("Only a creator of an issue can manage connections!"); window.location.href=document.referrer;</script>'; }  
         }
         }
     }

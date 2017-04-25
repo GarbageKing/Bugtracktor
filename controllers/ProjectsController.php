@@ -132,9 +132,10 @@ class ProjectsController extends Controller
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            /*return $this->render('update', [
                 'model' => $model,
-            ]);
+            ]);*/
+            return '<script>alert("You can\'t update a project you didn\'t create!"); window.location.href=document.referrer;</script>';
         }
     }
 
@@ -161,8 +162,13 @@ class ProjectsController extends Controller
                                                                                        
                 Yii::$app->db->createCommand()->delete('projects', ['id' => $id])->execute(); 
         
+                return $this->redirect(['index']);
         }
-        return $this->redirect(['index']);
+        else 
+        {
+            return '<script>alert("You can\'t delete a project you didn\'t create!"); window.location.href=document.referrer;</script>';
+        }
+        
     }
 
     /**

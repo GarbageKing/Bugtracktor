@@ -113,3 +113,11 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/*My Styles*/
+
+.navbar-brand img
+{
+    height:100%;
+    width: auto;
+}

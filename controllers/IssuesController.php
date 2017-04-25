@@ -180,10 +180,16 @@ class IssuesController extends Controller
     public function actionDelete($id)
     {        
         if(Yii::$app->db->createCommand()->delete('users_issues', ['id_issue' => $id, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->execute()){
-               Yii::$app->db->createCommand()->delete('users_issues', ['id_issue' => $id])->delete('issues', ['id' => $id])->execute(); 
-        
+               Yii::$app->db->createCommand()->delete('users_issues', ['id_issue' => $id])->execute(); 
+               Yii::$app->db->createCommand()->delete('issues', ['id' => $id])->execute();
+               
+            return $this->redirect(['index']);
         }
-        return $this->redirect(['index']);
+        else 
+        {
+            return '<script>alert("You can\'t delete an issue you didn\'t create!"); window.location.href=document.referrer;</script>';
+        }
+        
     }
 
     /**

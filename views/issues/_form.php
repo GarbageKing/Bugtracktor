@@ -33,10 +33,12 @@ use yii\helpers\ArrayHelper;
     '5' => 'Task[High]'
 ]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([
-    '0' => 'Closed',
-    '1' => 'Open'    
-]) ?>
+    <?= $model->isNewRecord ? ''   :        
+    $form->field($model, 'status')->dropDownList([
+    '1' => 'Open',
+    '0' => 'Closed'        
+])   
+?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

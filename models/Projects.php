@@ -63,4 +63,25 @@ class Projects extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UsersProjects::className(), ['id_projects' => 'id']);
     }
+    
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($this->isNewRecord)
+            { 
+                
+            $project_id = Projects::find()->where(['name' => trim($this->name)])->one()['id'];       
+            
+            $exists = UsersProjects::find()->where( [ 'id_user' => Yii::$app->user->getId(), 'id_projects' => $project_id ] )->exists();
+            
+            if($exists){                
+                die( '<script>alert("You already have a project with this name!"); window.location.href="?r=projects%2Fcreate";</script>');                    
+            }
+            
+            }
+            return parent::beforeSave($insert);
+        }
+    }
+    
 }

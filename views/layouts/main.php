@@ -27,7 +27,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Bugtracktor',
+        //'brandLabel' => 'Bugtracktor',
+        'brandLabel' => Html::img('@web/img/bugtracktor.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

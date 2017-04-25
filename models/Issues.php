@@ -50,8 +50,8 @@ class Issues extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_project' => 'Id Project',
-            'name' => 'Name',
+            'id_project' => 'Project',
+            'name' => 'Issue Name',
             'description' => 'Description',
             'priority' => 'Type',
             'status' => 'Status',
@@ -74,4 +74,25 @@ class Issues extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UsersIssues::className(), ['id_issue' => 'id']);
     }
+    
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($this->isNewRecord)
+            { 
+                
+            $this->status = 1;
+                
+            $exists = Issues::find()->where(['name' => trim($this->name), 'id_project' => $this->id_project])->exists();                   
+            
+            if($exists){                
+                die( '<script>alert("There is an issue within this project with the same name!"); window.location.href="?r=issues%2Fcreate";</script>');                    
+            }
+            
+            }
+            return parent::beforeSave($insert);
+        }
+    }    
+    
 }

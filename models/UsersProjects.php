@@ -44,7 +44,7 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_user' => 'Id User',
+            'id_user' => 'Username',
             'id_projects' => 'Id Projects',
             'is_creator' => 'Is Creator',
         ];
