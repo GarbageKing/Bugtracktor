@@ -19,7 +19,7 @@ class IssuesSearch extends Issues
     {
         return [
             [['id', 'priority', 'status'], 'integer'],
-            [['name', 'description', 'cr_date', 'id_project'], 'safe'],
+            [['name', 'description', 'cr_date', 'id_project', 'dl_date'], 'safe'],
         ];
     }
 
@@ -69,6 +69,7 @@ class IssuesSearch extends Issues
             'priority' => $this->priority,
             'status' => $this->status,
             'cr_date' => $this->cr_date,
+            'dl_date' => $this->dl_date,
         ]);
 
         $query->andFilterWhere(['like', 'issues.name', $this->name])

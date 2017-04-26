@@ -36,7 +36,7 @@ class Issues extends \yii\db\ActiveRecord
         return [
             [['id_project', 'name'], 'required'],
             [['id_project', 'priority', 'status'], 'integer'],
-            [['cr_date'], 'safe'],
+            [['cr_date', 'dl_date'], 'safe'],
             [['name'], 'string', 'max' => 300],
             [['description'], 'string', 'max' => 2000],
             [['id_project'], 'exist', 'skipOnError' => true, 'targetClass' => Projects::className(), 'targetAttribute' => ['id_project' => 'id']],
@@ -56,6 +56,7 @@ class Issues extends \yii\db\ActiveRecord
             'priority' => 'Type',
             'status' => 'Status',
             'cr_date' => 'Cr Date',
+            'dl_date' => 'Deadline'
         ];
     }
 

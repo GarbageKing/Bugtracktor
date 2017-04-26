@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Issues */
@@ -39,6 +40,8 @@ use yii\helpers\ArrayHelper;
     '0' => 'Closed'        
 ])   
 ?>
+    
+    <?= $form->field($model, 'dl_date')->widget(DatePicker::className(),['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

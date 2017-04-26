@@ -27,15 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             //'id_project',
             
-            'name',
-            'description',
+            'name',            
             [
                         'label' => 'Project',
                       'attribute' => 'id_project',                
                       
                       'value' => 'idProject.name',
             ],
-            
+            'description',
+            [
+            'attribute' => 'dl_date',  
+            'format' => 'raw',
+            'value'     => function ($model) {
+                if ($model->dl_date != null) {
+                    return $model->dl_date;               
+                } else {
+                    return '-';
+                }
+            },   
+            'filter'=>false,
+            ],
+            //'dl_date',
             'priority' =>[
                 'label' => 'Priority',
                'value' => function($model) {
@@ -53,15 +65,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     $priority = 'Task[High]';
                  return $priority;
 },
- 
+            'attribute' => 'priority',
+            'filter'=>false,
             ],
 // => ['format' =>[0=>'Low', 1=>'Medium', 2=>'High']],
              'status'=>
             [
                 'label' => 'Status',
-               'value' => function($model) {
+                'value' => function($model) {
     return $model->status == 1 ? 'Open' : 'Closed';
-}
+},               'attribute' => 'status',
+                'filter'=>false,
  
             ],
                       

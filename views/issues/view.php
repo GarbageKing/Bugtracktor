@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div id="issue-info" class="row">
         
         <div class="col-md-9">
-        <p>Created: <?php echo $model->cr_date; ?></p>
-        <p><?php echo $model->description; ?></p>
+        <p>Created: <?= $model->cr_date; ?></p>
+        <p><?= $model->description; ?></p>
         </div>
         <div class="col-md-3">
             <p>
@@ -57,6 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     $status = 'Open';
                  echo $status;
             ?>
+        </p>        
+        <p>
+            <h3>Deadline </h3>
+            <?= $model->dl_date ? $model->dl_date : '-'; ?>
         </p>
         </div>
     </div>

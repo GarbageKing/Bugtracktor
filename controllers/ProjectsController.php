@@ -127,15 +127,17 @@ class ProjectsController extends Controller
         
         $isCreator = UsersProjects::find()->where([ 'id_projects' => $id, 'id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->exists();
         
-        if ($model->load(Yii::$app->request->post()) && $isCreator) {
-            //echo 'aga'; die;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            /*return $this->render('update', [
-                'model' => $model,
-            ]);*/
+        if(!$isCreator)
             return '<script>alert("You can\'t update a project you didn\'t create!"); window.location.href=document.referrer;</script>';
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {            
+            return $this->redirect(['view', 'id' => $model->id]);
+        } 
+        else {          
+            
+            return $this->render('update', [
+                'model' => $model                
+            ]);
         }
     }
 

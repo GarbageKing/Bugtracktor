@@ -31,7 +31,7 @@ AppAsset::register($this);
         'brandLabel' => Html::img('@web/img/bugtracktor.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([
