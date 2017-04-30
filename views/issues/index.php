@@ -12,15 +12,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="issues-index">
 
-    <h1>Issues creation page</h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Issue', ['create'], ['class' => 'btn btn-success']) ?>        
-    </p>
+    <div class="row">
+    <div class="col-sm-12">
+    <h1>Issues attached to you</h1>    
+        <?= Html::a('Create New', ['create'], ['class' => 'btn btn-success']) ?>     
+    </div>
+    </div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'filterModel' => $searchModel, 
+        'tableOptions' => [
+            'class' => 'table table-bordered'
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -34,13 +37,27 @@ $this->params['breadcrumbs'][] = $this->title;
                       
                       'value' => 'idProject.name',
             ],
-            'description',
+            //'description',
+            [
+                'attribute' => 'description',
+                'value'     => function ($model) {
+                if(mb_strlen($model->description)>=50)
+                return substr($model->description, 0, 50).'...';
+                return $model->description;
+                }
+            ],
             [
             'attribute' => 'dl_date',  
             'format' => 'raw',
             'value'     => function ($model) {
                 if ($model->dl_date != null) {
-                    return $model->dl_date;               
+                    if(strtotime(date("Y-m-d", strtotime("+3 days"))) > strtotime($model->dl_date) &&
+                            $model->status==1) { 
+                        return '<span style="color:red">' . $model->dl_date . '</span>';  
+                    }  
+                    else {
+                        return $model->dl_date;  
+                    }
                 } else {
                     return '-';
                 }

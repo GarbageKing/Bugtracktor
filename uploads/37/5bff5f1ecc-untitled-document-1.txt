@@ -1,0 +1,994 @@
+<script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+<script type="text/javascript">
+    var wayforpay = new Wayforpay();
+    var pay = function () {
+        wayforpay.run({
+                merchantAccount : <?php echo $this->config->get('wayforpay_merchant'); ?>,
+                merchantDomainName : <?php echo $_SERVER['HTTP_HOST']; ?>,
+                authorizationType : "simpleSignature",
+                merchantSignature : "flk3409refn54t54t*FNJRET", //7
+                orderReference : <?php echo $order_id . '_' . time(); ?>,
+                orderDate : <?php echo strtotime($order['date_added']); ?>,
+                amount : <?php echo $order['total']; ?>,
+                currency : "UAH",                
+                productName : <?php echo $products[0]['name'];  ?>, //7
+                productPrice : <?php echo $products[0]['price']; ?>, //7
+                productCount : <?php echo $products[0]['quantity']; ?>, //7
+                clientFirstName : <?php echo $order['payment_firstname']; ?>,
+                clientLastName : <?php echo $order['payment_lastname']; ?>,
+                clientEmail : <?php echo $order['email']; ?>,
+                clientPhone: <?php 
+                             $phone = str_replace(array('+', ' ', '(', ')'), array('', '', '', ''), $order['telephone']);
+                             if (strlen($phone) == 10) {
+                                $phone = '38' . $phone;
+                                    } elseif (strlen($phone) == 11) {
+                                        $phone = '3' . $phone;
+                                      }
+                             echo $phone; ?>
+            },
+            function (response) {
+                // on approved             
+            },
+            function (response) {
+                // on declined
+            },
+            function (response) {
+                // on pending or in processing
+            }
+        );
+    }
+</script>  
+
+
+<script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+<script type="text/javascript">
+    var wayforpay = new Wayforpay();
+    var pay = function () {
+        wayforpay.run({
+                merchantAccount : <?php echo $mercAccount; ?>,
+                merchantDomainName : <?php echo $mercDomainName; ?>,
+                authorizationType : <?php echo $authoriType; ?>,
+                merchantSignature : <?php echo $mercSignature; ?>, //7
+                orderReference : <?php echo $ordReference; ?>,
+                orderDate : <?php echo $ordDate; ?>,
+                amount : <?php echo $amounts; ?>,
+                currency : <?php echo $currencys; ?>,                
+                productName : <?php echo $prodName;  ?>, //7
+                productPrice : <?php echo $prodPrice; ?>, //7
+                productCount : <?php echo $prodCount; ?>, //7
+                clientFirstName : <?php echo $clFirstName; ?>,
+                clientLastName : <?php echo $clLastName; ?>,
+                clientEmail : <?php echo $clEmail; ?>,
+                clientPhone: <?php echo $clPhone; ?>
+            },
+            function (response) {
+                // on approved             
+            },
+            function (response) {
+                // on declined
+            },
+            function (response) {
+                // on pending or in processing
+            }
+        );
+    }
+</script>  
+
+wefef2f2fh
+controller/product
+model, controller wayforpay
+template
+
+1i5
+view/theme/template/product/product.tpl
+
+
+wp
+gyp7DcDGfMh&6UEbl@
+V-D
+
+<script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+<script type="text/javascript">
+    var wayforpay = new Wayforpay();
+    var pay = function () { 
+        var nameProd = jQuery(".summary > h1").text();
+        var priceProd = jQuery(".price > .amount").text().slice(0,-1);
+        <?php $wfp = new WC_wayforpay(); 
+              $arr = $wfp->getData(); ?>
+        wayforpay.run({
+                merchantAccount : '<?php echo $arr['merchantAccount']; ?>',
+                merchantDomainName : '<?php echo $arr['merchantDomainName'];//$arr['merchantDomainName']; ?>',
+                merchantAuthType : '<?php  echo $arr['merchantAuthType']; ?>',
+                merchantSignature : '<?php echo $arr['merchantSignature']; ?>',
+                orderReference : '<?php echo $arr['orderReference']; ?>',
+                orderDate : '<?php echo $arr['orderDate']; ?>',
+                amount : '<?php echo $arr['productPrice']; ?>',
+                currency : '<?php echo $arr['currency']; ?>',
+                productName : '<?php echo $arr['productName']; ?>',
+                productPrice : '<?php echo $arr['productPrice']; ?>',
+                productCount : '<?php echo $arr['productCount']; ?>',
+                clientFirstName : "Buyer",
+                clientLastName : "Payer",                
+                clientPhone: "380000000000"
+            },
+            function (response) {
+                // on approved             
+            },
+            function (response) {
+                // on declined
+            },
+            function (response) {
+                // on pending or in processing
+            }
+        );    
+
+    }
+    
+    jQuery(document).ready(function(){
+    jQuery('#wfpay').click(function(){
+    pay();
+    });
+    });
+    
+</script>
+
+WP
+singleproduct/addtocart/simple.php
+templates/single-product.php
+plugin
+
+Presta
+V-D
+V-D
+12345678
+
+controllers/ProductController
+
+<script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+<script type="text/javascript">
+    var wayforpay = new Wayforpay();
+    var pay = function () { 
+        
+        {php} $wfp = new WC_wayforpay(); 
+              $arr = $wfp->getData(); {/php}
+        wayforpay.run({
+                merchantAccount : '<?php echo $arr['merchantAccount']; ?>',
+                merchantDomainName : '<?php echo $arr['merchantDomainName']; ?>',
+                merchantAuthType : '<?php  echo $arr['merchantAuthType']; ?>',
+                merchantSignature : '<?php echo $arr['merchantSignature']; ?>',
+                orderReference : '<?php echo $arr['orderReference']; ?>',
+                orderDate : '<?php echo $arr['orderDate']; ?>',
+                amount : '<?php echo $arr['productPrice']; ?>',
+                currency : '<?php echo $arr['currency']; ?>',
+                productName : '<?php echo $arr['productName']; ?>',
+                productPrice : '<?php echo $arr['productPrice']; ?>',
+                productCount : '<?php echo $arr['productCount']; ?>',
+                clientFirstName : "Buyer",
+                clientLastName : "Payer",                
+                clientPhone: "380000000000"
+            },
+            function (response) {
+                // on approved             
+            },
+            function (response) {
+                // on declined
+            },
+            function (response) {
+                // on pending or in processing
+            }
+        );    
+
+    }
+    
+    jQuery(document).ready(function(){
+    jQuery('#way4pay').click(function(){
+    pay();
+    });
+    });
+    
+</script>
+
+RENAME TABLE accessrights_link TO ACCESSRIGHTS_LINK;
+RENAME TABLE appsettings TO APPSETTINGS;
+RENAME TABLE articles TO ARTICLES;
+RENAME TABLE articles_categories TO ARTICLES_CATEGORIES;
+RENAME TABLE cfolder TO CFOLDER;
+RENAME TABLE company TO COMPANY;
+RENAME TABLE contact TO CONTACT;
+RENAME TABLE contactfield TO CONTACTFIELD;
+RENAME TABLE contacttype TO CONTACTTYPE;
+RENAME TABLE currency TO CURRENCY;
+RENAME TABLE disk_usage TO DISK_USAGE;
+RENAME TABLE email_contact TO EMAIL_CONTACT;
+RENAME TABLE geo_count TO GEO_COUNT;
+RENAME TABLE geo_not_selected TO GEO_NOT_SELECTED;
+RENAME TABLE mmmessage TO MMMESSAGE;
+RENAME TABLE mmmsentto TO MMMSENTTO;
+RENAME TABLE mmsent TO MMSENT;
+RENAME TABLE partner_balance TO PARTNER_BALANCE;
+RENAME TABLE partners TO PARTNERS;
+RENAME TABLE regions_meta TO REGIONS_META;
+RENAME TABLE sc__courier_rates TO SC__courier_rates;
+RENAME TABLE sc__intershipper_carriers TO SC__intershipper_carriers;
+RENAME TABLE sc__module_payment_invoice_jur TO SC__module_payment_invoice_jur;
+RENAME TABLE sc__module_payment_invoice_phys TO SC__module_payment_invoice_phys;
+RENAME TABLE sc__module_shipping_bycountries_byzones_rates TO SC__module_shipping_bycountries_byzones_rates;
+RENAME TABLE sc__module_shipping_bycountries_byzones_rates_percent TO SC__module_shipping_bycountries_byzones_rates_percent;
+RENAME TABLE sc_aff_commissions TO SC_aff_commissions;
+RENAME TABLE sc_aff_payments TO SC_aff_payments;
+RENAME TABLE sc_analitycs TO SC_analitycs;
+RENAME TABLE sc_articles TO SC_articles;
+RENAME TABLE sc_articles_comments TO SC_articles_comments;
+RENAME TABLE sc_aux_pages TO SC_aux_pages;
+RENAME TABLE sc_bg TO SC_bg;
+RENAME TABLE sc_categories TO SC_categories;
+RENAME TABLE sc_category__product_options TO SC_category__product_options;
+RENAME TABLE sc_category_articles TO SC_category_articles;
+RENAME TABLE sc_category_product TO SC_category_product;
+RENAME TABLE sc_category_product_options__variants TO SC_category_product_options__variants;
+RENAME TABLE sc_cities TO SC_cities;
+RENAME TABLE sc_cities_temp TO SC_cities_temp;
+RENAME TABLE sc_config_settings TO SC_config_settings;
+RENAME TABLE sc_countries TO SC_countries;
+RENAME TABLE sc_currency_types TO SC_currency_types;
+RENAME TABLE sc_custgroups TO SC_custgroups;
+RENAME TABLE sc_customer_addresses TO SC_customer_addresses;
+RENAME TABLE sc_customer_reg_fields TO SC_customer_reg_fields;
+RENAME TABLE sc_customer_reg_fields_values TO SC_customer_reg_fields_values;
+RENAME TABLE sc_customer_reg_fields_values_quickreg TO SC_customer_reg_fields_values_quickreg;
+RENAME TABLE sc_customers TO SC_customers;
+RENAME TABLE sc_default_seo TO SC_default_seo;
+RENAME TABLE sc_discount_coupons TO SC_discount_coupons;
+RENAME TABLE sc_discussions TO SC_discussions;
+RENAME TABLE sc_districts TO SC_districts;
+RENAME TABLE sc_division_access TO SC_division_access;
+RENAME TABLE sc_division_custom_settings TO SC_division_custom_settings;
+RENAME TABLE sc_division_interface TO SC_division_interface;
+RENAME TABLE sc_divisions TO SC_divisions;
+RENAME TABLE sc_htmlcodes TO SC_htmlcodes;
+RENAME TABLE sc_interface_interfaces TO SC_interface_interfaces;
+RENAME TABLE sc_language TO SC_language;
+RENAME TABLE sc_linkexchange_categories TO SC_linkexchange_categories;
+RENAME TABLE sc_linkexchange_links TO SC_linkexchange_links;
+RENAME TABLE sc_local TO SC_local;
+RENAME TABLE sc_local_old TO SC_local_old;
+RENAME TABLE sc_localgroup TO SC_localgroup;
+RENAME TABLE sc_meta TO SC_meta;
+RENAME TABLE sc_module_configs TO SC_module_configs;
+RENAME TABLE sc_modules TO SC_modules;
+RENAME TABLE sc_news_table TO SC_news_table;
+RENAME TABLE sc_order_partner_log TO SC_order_partner_log;
+RENAME TABLE sc_order_price_discount TO SC_order_price_discount;
+RENAME TABLE sc_order_status TO SC_order_status;
+RENAME TABLE sc_order_status_changelog TO SC_order_status_changelog;
+RENAME TABLE sc_ordered_carts TO SC_ordered_carts;
+RENAME TABLE sc_orders TO SC_orders;
+RENAME TABLE sc_orders_discount_coupons TO SC_orders_discount_coupons;
+RENAME TABLE sc_partnership_types TO SC_partnership_types;
+RENAME TABLE sc_payment_types TO SC_payment_types;
+RENAME TABLE sc_payment_types__shipping_methods TO SC_payment_types__shipping_methods;
+RENAME TABLE sc_price_by_region TO SC_price_by_region;
+RENAME TABLE sc_price_by_region_category TO SC_price_by_region_category;
+RENAME TABLE sc_price_markup TO SC_price_markup;
+RENAME TABLE sc_product_list TO SC_product_list;
+RENAME TABLE sc_product_list_item TO SC_product_list_item;
+RENAME TABLE sc_product_options TO SC_product_options;
+RENAME TABLE sc_product_options_set TO SC_product_options_set;
+RENAME TABLE sc_product_options_values TO SC_product_options_values;
+RENAME TABLE sc_product_pictures TO SC_product_pictures;
+RENAME TABLE sc_products TO SC_products;
+RENAME TABLE sc_products_opt_val_variants TO SC_products_opt_val_variants;
+RENAME TABLE sc_regions TO SC_regions;
+RENAME TABLE sc_related_items TO SC_related_items;
+RENAME TABLE sc_rpost_zones TO SC_rpost_zones;
+RENAME TABLE sc_settings TO SC_settings;
+RENAME TABLE sc_settings_groups TO SC_settings_groups;
+RENAME TABLE sc_shipping_methods TO SC_shipping_methods;
+RENAME TABLE sc_shopping_cart_items TO SC_shopping_cart_items;
+RENAME TABLE sc_shopping_cart_items_content TO SC_shopping_cart_items_content;
+RENAME TABLE sc_shopping_carts TO SC_shopping_carts;
+RENAME TABLE sc_spmodules TO SC_spmodules;
+RENAME TABLE sc_spmodules_settings TO SC_spmodules_settings;
+RENAME TABLE sc_subscribers TO SC_subscribers;
+RENAME TABLE sc_system TO SC_system;
+RENAME TABLE sc_tagged_objects TO SC_tagged_objects;
+RENAME TABLE sc_tags TO SC_tags;
+RENAME TABLE sc_tax_classes TO SC_tax_classes;
+RENAME TABLE sc_tax_rates TO SC_tax_rates;
+RENAME TABLE sc_tax_rates__zones TO SC_tax_rates__zones;
+RENAME TABLE sc_tax_zip TO SC_tax_zip;
+RENAME TABLE sc_zones TO SC_zones;
+RENAME TABLE sms_balance TO SMS_BALANCE;
+RENAME TABLE sms_credit_history TO SMS_CREDIT_HISTORY;
+RENAME TABLE sms_history TO SMS_HISTORY;
+RENAME TABLE sxgeo_country TO SXGEO_COUNTRY;
+RENAME TABLE temp_cities_district TO TEMP_CITIES_DISTRICT;
+RENAME TABLE temp_district TO TEMP_DISTRICT;
+RENAME TABLE temp_ukr_cities TO TEMP_UKR_CITIES;
+RENAME TABLE timezones TO TIMEZONES;
+RENAME TABLE u_accessrights TO U_ACCESSRIGHTS;
+RENAME TABLE ug_accessrights TO UG_ACCESSRIGHTS;
+RENAME TABLE ugroup TO UGROUP;
+RENAME TABLE ugroup_user TO UGROUP_USER;
+RENAME TABLE unsubscriber TO UNSUBSCRIBER;
+RENAME TABLE user_disk_quota TO USER_DISK_QUOTA;
+RENAME TABLE user_settings TO USER_SETTINGS;
+RENAME TABLE wd_banners TO WD_BANNERS;
+RENAME TABLE wd_banners_item TO WD_BANNERS_ITEM;
+RENAME TABLE wg_param TO WG_PARAM;
+RENAME TABLE wg_widget TO WG_WIDGET;
+
+CREATE table SC_merchantss
+(
+Id int primary key NOT NULL AUTO_INCREMENT,
+Name varchar(255),
+Merchant varchar(255) NOT NULL,
+Terminal varchar(255),
+Type varchar(5),
+Active tinyint(1) default NULL   
+);
+
+INSERT INTO `SC_divisions` SET
+		`xName`	=	'Мерчанты',
+		`xKey`	=	'',
+		`xUnicKey`=	'merchants',
+		`xParentID`=	'12',
+		`xEnabled`=	'1',
+		`xPriority`=	'1',
+		`xTemplate`=	'',
+		`xLinkDivisionUKey`= ''
+        
+        UPDATE SC_divisions SET xPriority=1, xTemplate=12
+WHERE xID = 261;
+
+INSERT INTO `U_ACCESSRIGHTS` (`AR_ID`, `AR_PATH`, `AR_OBJECT_ID`, `AR_VALUE`,`AR_AUX`) VALUES ('LM_WEBLIFE', '/ROOT/SC/FUNCTIONS', 'SC__261', '1', NULL)
+
+INSERT INTO `SC_division_interface` (`xDivisionID`, `xInterface`, `xPriority`, `xInheritable`) VALUES ('261', '1_merchants', '0', '0')
+
+bb sadj9091dd
+wp2 tVewOn5mA3TZPR2GqH
+
+bitrix
+/var/www/bitrix/bitrix/components/bitrix/catalog/templates/.default/bitrix/catalog.element/.default/template.php
++plugin folder
+
+ сначала git add <измененные файлы>
+[11:05:40] Artem Kruzhalin: потом git commit -m 'xxx'
+git push origin master
+
+Сделал виджет Битрикса вп-и-коммерс опенкарт 15 правки в ок 2, drupal
+
+Drupal 
+node.tpl.php, uc_wayforpay.module
+
+Simpla
+key
+aebciigkfe nmpijgpjrk uttvvqyvw8 9987e8cf9h heffghkgei jlristsk qxy9uaaa2a 8be8figbdf ijdggkjhjr mpptnnvsut zc476d97da fdebggfjbe kmlopqhpis pqmqvatby5 4ecddhehcj imiejfjgin isppnpmvno r4u9vaz9aa ae8i6d7j8l bggpdpmoit rwnttrn3o5 s9x98g8h7f 9gbldl9ejh djlrflmsnv tas9s5wava 7dbgcccgaf hkem
+
+design/default/html/product.tpl
+payment/wayforpay/wayforpay.php
+view/productview.php
+
+Set up your local directory
+Set up Git on your machine if you haven't already.
+mkdir /path/to/your/project
+cd /path/to/your/project
+git init
+git remote add origin git@bitbucket.org:centumd/simpla.git
+Create your first file, commit, and push
+echo "Garbage_kinG" >> contributors.txt
+git add contributors.txt
+git commit -m 'Initial commit with contributors'
+git push -u origin master
+
+cd 
+make zip
+clear folder add needed
+git fetch && git checkout pure-widget
+git add -A
+git commit -m 'pure widget opencart'
+git push origin pure-widget
+delete folder, unzip old
+git checkout master
+
+rutracker
+Garbage_kinG
+magicpurplecow@gmail.com
+fs2328973yf72f
+
+magento
+admin
+admin1A-
+f71309fc0392270a43cd60b75ac0e617
+
+valeraa.ahremenko@gmail.com
+got^q0ex3PL11*Z!XT
+
+putsmail
+ojirjg908388
+
+mailchimp
+poijdsC0983/1
+
+emailreach
+sdfj90f220901
+
+ukraine centum
+[16:20:23] Валера Ахременко: valera
+[16:20:30] Валера Ахременко: qwerty
+[16:21:47] Валера Ахременко: centumd2015@gmail.com
+[16:22:20] Валера Ахременко: centum2015
+
+
+<?php Mage::helper('WayForPay_Widget')->buttonPlace(); ?>
+wayforpay whole widget plugin
+payment/model/wayforpay.php
+/var/www/magento1/app/design/frontend/rwd/default/template/catalog/product/view/addtocart.phtml
+
+
+/var/www/magento1/app/code/local/WayForPay/Payment/Model/WayForPay.php
+/var/www/magento1/app/design/frontend/rwd/default/template/catalog/product/view/addtocart.phtml
+/var/www/magento1/app/code/local/WayForPay/Payment/Helper/Data.php
+/var/www/magento1/app/code/local/WayForPay/Payment/etc/system.xml
+
+1.6
+6599ae034df90f36344c60aa5904935a
+
+iria-tour
+li {list-style:none;}
+
+.slide-post .entry-meta {display:none;}
+
+.social-widget{
+display:inline-block;
+background-color:#22aadd;
+color:#fff;
+padding:0.6em;
+width:16%;
+text-align:center;
+}
+
+.social-widget:hover{
+background-color:#404040;
+}
+
+.wpp-list>li
+{
+padding-bottom:5px;
+}
+
+.itt_td_small
+{
+width:10% !important;
+}
+
+.itt_td_big
+{
+width:40% !important;
+}
+
+.itt_td_small.itt_right
+{
+width:20% !important;
+}
+
+function enqueue_new_stylesheets(){
+	wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); 
+}
+add_action('wp_enqueue_scripts','enqueue_new_stylesheets');
+
+<a href="https://vk.com/" target="_blank"><div class="social-widget"><i class="fa fa-vk fa-lg"></i></div></a>
+
+<a href="https://facebook.com/" target="_blank"><div class="social-widget"><i class="fa fa-facebook fa-lg"></i></div></a>
+
+<a href="https://plus.google.com/" target="_blank"><div class="social-widget"><i class="fa fa-google-plus fa-lg"></i></div></a>
+
+<a href="https://www.instagram.com/" target="_blank"><div class="social-widget"><i class="fa fa-instagram fa-lg"></i></div></a>
+
+slider.php
+function poseidon_slider() { 
+	
+	// Get Theme Options from Database
+	$theme_options = poseidon_theme_options();
+
+	// Display Featured Post Slideshow if activated
+	if ( is_page_template( 'template-slider.php' )
+		or ( true == $theme_options['slider_blog'] and is_home()  or true == $theme_options['slider_blog'] and is_single() or true == $theme_options['slider_blog'] and is_page() or true == $theme_options['slider_blog'] and is_category()) 
+		or ( true == $theme_options['slider_magazine'] and is_page_template( 'template-magazine.php' ))
+	) { 
+
+		get_template_part( 'template-parts/post-slider' );
+		//print_r($theme_options);		
+	}
+
+}
+
+Нужно закинуть в 
+/wp-content/themes/{name}/languages
+Файлы
+ru_RU.mo ru_RU.po
+
+floristik
+functions.upc.php,
+merchants.php
+
+magc
+f5935a18e3740facb2e73852463817ae
+размеры все равно все
+agbdlcidufx90
+git add /app/code/local/Centum
+git add app/etc/modules/Centum_Parser.xml
+git add
+
+porto mage
+45a73ff2ed8d9fa2dbb2838674df80e0
+public function getCategoryLinks()
+createProductFormUrl()
+prepareData($data) - $data['AnaKumaş'],...
+
+1) stock +
+2) simple images + 
+3) js + /var/www/porto/skin/frontend/smartw
+4) categories
+
+http://www.modabaku.com/parser12800cntm
+
+opencart 1.5 - tormozit, "uje rabotaet" (admin)
+drupal - net ocherednoj tablicu (admin)
+prestashop - slishkom mnogo zaprosov (all)
+
+6y6025z
+http://www.modabaku.com/index.php/admin/catalog_product/edit/id/115776/key/465dee68d22b24550a74ec5b676e09a2/
+6Y0051Z1H45İndigo6
+
+Magento: http://www.modabaku.com/index.php/admin 
+логин: admin пароль: a01200120
+
+CPANEL: https://144.76.162.27:2083   176.9.123.19:2083
+логин: modabaku пароль: -01200120- 
+
+
+URL: https://176.9.4.43:2087
+Username: root
+Password: FZqDcVVei2PXRG
+
+kvmnl02-7598.fornex.org
+centum_dev
+3K9l2D9o
+
+merchantAccount - test_merch_n1
+merchantSecretKey - flk3409refn54t54t*FNJRET
+
+new cent
+sdvuf76sd8
+
+$T5WlLqFPU$O@qp5Ag - vivat
+
+auto
+
+md5 auto old $2y$10$TpotlEiEn3YYIA1A048QE.nvv7EjxFDd9Da.TrSsWTSUnEE4.xpcS
+
+[16:21:47] Валера Ахременко: centumd2015@gmail.com
+[16:22:20] Валера Ахременко: centum2015
+[16:22:31] Валера Ахременко: http://www.ukraine.com.ua/
+
+[16:59:54] Валера Ахременко: http://www.vivat-ukraine.com.ua/
+[17:00:09] Валера Ахременко: Login cs.muravey@gmail.com
+Password dbdfnerhfbyf2013
+www. ukraine.com.ua
+
+webmail
+denis.vovchenko
+jwe98dy278ghd
+
+brew
+sergey07121971@mail.ru
+syC%)F@tT#Y07Z6v
+
+radiostore
+https://uashared01.twinservers.net:2083/
+radiosto
+b7Gl2s5D6c
+/admin123
+radiostore@at.ua
+radiomed99
+
+admin iria
+$P$BRl/qghVbZpXs97z1xNB75qTqv4rWy1 
+
+tattoo
+UyI^u4VreEsfV%1^B2
+
+[12:15:26] Валера Ахременко: Https://www.irankoton.com:2083 
+User:irankoton 
+Parol:Aa--0120-- 
+Magento admin: 
+User:admin 
+ Parol:a01200120
+
+c 4073
+
+http://joxi.ru/E2pLRNDcyWMZ2Y
+http://joxi.ru/GrqKOJDUqgdp2z
+http://joxi.ru/12M4G3nCQDQqmJ
+http://joxi.ru/MAjJYxDTOeOxAe
+http://joxi.ru/v29DjkzHwewjmG
+
+Hello, my name is Denis, I'm a web-developer from Ukraine. I've recently joined the company. Last week I did: testing of the site, fixing some really minor bugs. My plans - test some more and fix some more.
+
+Скрывание на ЛС
+
+1) description полностью был, еще и в таком виде как на манго, как он и просил, или он имел в виду description с waikiki?
+2) Теперь качество будет одинаково
+3) В случае с вайкики - изначально это не обсуждалось, потом нужно было чтобы у симплов не было картинок, их у них нет, а те что добавились на сервер, раз они не используются, они могут удалять тем экстеншном, каким уже удаляли раньше. 
+В случае с манго - я все учитывал изначально и никаких картинок у симплов нет и не загружается. Это просто не прописано в коде.
+
+http://bitrix.w4p.k2-service.com/personal/order/
+http://bitrix.w4p.k2-service.com/tools/oplata_result.php
+
+SELECT e . * 
+FROM catalog_product_entity AS e
+LEFT JOIN catalog_category_product AS cp ON cp.product_id = e.entity_id
+WHERE cp.category_id IS NULL 
+
+SELECT e . * 
+FROM catalog_product_entity AS e
+LEFT JOIN catalog_category_product AS cp ON cp.product_id = e.entity_id
+WHERE cp.category_id IS NULL 
+AND entity_id > 217387
+
+SELECT * 
+FROM catalog_product_entity AS e
+LEFT JOIN catalog_category_product AS cp ON cp.product_id = e.entity_id
+WHERE cp.category_id IS NULL 
+AND type_id =  "configurable"
+
+DELETE e . * 
+FROM catalog_product_entity AS e
+LEFT JOIN catalog_category_product AS cp ON cp.product_id = e.entity_id
+WHERE cp.category_id IS NULL 
+
+DELETE e . * 
+FROM catalog_product_entity AS e
+LEFT JOIN catalog_category_product AS cp ON cp.product_id = e.entity_id
+WHERE cp.category_id IS NULL 
+AND entity_id > 217387
+
+SELECT *
+FROM catalog_product_entity AS a
+LEFT JOIN catalog_product_entity_media_gallery AS b ON a.entity_id = b.entity_id
+WHERE b.value IS NULL
+AND type_id =  "configurable"
+
+a:1:{s:16:"BX_PAY_SYSTEM_ID";i:9;}
+
+a:6:{s:12:"WAYFORPAY_MERCHANT";a:2:{s:4:"TYPE";s:0:"";s:5:"VALUE";s:13:"test_merch_n1";}s:14:"WAYFORPAY_SECURE_KEY";a:2:{s:4:"TYPE";s:0:"";s:5:"VALUE";s:24:"flk3409refn54t54t*FNJRET";}s:18:"WAYFORPAY_PRICE_CURRENCY";a:2:{s:4:"TYPE";s:0:"";s:5:"VALUE";s:3:"UAH";}s:23:"WAYFORPAY_SERVER_CALLBACK_URL";a:2:{s:4:"TYPE";s:0:"";s:5:"VALUE";s:41:"http://bitrix.dev/tools/oplata_result.php";}s:16:"WAYFORPAY_RESPONSE_URL";a:2:{s:4:"TYPE";s:0:"";s:5:"VALUE";s:18:"http://bitrix.dev/";}s:12:"WAYFORPAY_LANGUAGE";a:2:{s:4:"TYPE";s:0:"";s:5:"VALUE";s:2:"RU";}}
+
+Array ( [0] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/kiz-bebek/Mont/2408724/487226 [1] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/kiz-bebek/Mont/2423707/487251blslbsd [2] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2468526/492823 [3] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2418081/490485 [4] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415335/488297 [5] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415329/491069 [6] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2489039/494769dssdsdv [7] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2433045/488301bb8 [8] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415319/481315 [9] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2418078/480375 [10] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2433100/486471 [11] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-cocuk/Takim/2594048/496318 [12] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415341/480708 [13] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2418078/480376 ) Array ( [0] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Takim/2594048/496318 [1] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2489039/494769 [2] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2468526/492823 [3] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2418081/490485 [4] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415335/488297 [5] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2433045/488301 [6] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2418078/480375 [7] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415341/480708 [8] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2433100/486471 [9] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2418078/480376 ) Array ( [0] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/kiz-bebek/Mont/2408724/487226 [1] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/kiz-bebek/Mont/2423707/487251blslbsd [5] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415329/491069 [6] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2489039/494769dssdsdv [7] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2433045/488301bb8 [8] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-bebek/Pantolon/2415319/481315 [11] => http://www.lcwaikiki.com/tr-TR/TR/urun/LC-WAIKIKI/erkek-cocuk/Takim/2594048/496318 )
+
+<?php
+
+class Way4Pay
+{
+    const URL = 'https://secure.wayforpay.com/pay';
+    const WAYFORPAY_TRANSACTION_APPROVED = 'Approved';
+    const WAYFORPAY_TRANSACTION_DECLINED = 'Declined';
+    const WAYFORPAY_SIGNATURE_SEPARATOR = ';';
+    const WAYFORPAY_ORDER_STATE_PAID = 'paid';
+    protected $keysForResponseSignature = array(
+        'merchantAccount',
+        'orderReference',
+        'amount',
+        'currency',
+        'authCode',
+        'cardPan',
+        'transactionStatus',
+        'reasonCode'
+    );
+    /** @var array */
+    protected $keysForSignature = array(
+        'merchantAccount',
+        'merchantDomainName',
+        'orderReference',
+        'orderDate',
+        'amount',
+        'currency',
+        'productName',
+        'productCount',
+        'productPrice'
+    );
+	public $secret_key = '';
+    public function allowedCurrency()
+    {
+        return array('UAH', 'RUB', 'USD', 'EUR');
+    }
+
+    /**
+     * @param $option
+     * @param $keys
+     *
+     * @return string
+     */
+    public function getSignature($option, $keys)
+    {
+        $hash = array();
+        foreach ($keys as $dataKey) {
+            if (!isset($option[$dataKey])) {
+                continue;
+            }
+            if (is_array($option[$dataKey])) {
+                foreach ($option[$dataKey] as $v) {
+                    $hash[] = $v;
+                }
+            } else {
+                $hash [] = $option[$dataKey];
+            }
+        }
+        $hash = implode(self::WAYFORPAY_SIGNATURE_SEPARATOR, $hash);
+	//echo $this->secret_key; die;
+        return hash_hmac('md5', $hash, $this->secret_key); //CSalePaySystemAction::GetParamValue("W4P_SECURE_KEY"));
+    }
+
+///////////////////////////
+public function WidgetData(){
+        
+        global $NameProd;
+        global $PriceProd;
+        global $CurProd;
+        
+        $db_ptype = CSalePaySystem::GetList($arOrder = Array("SORT"=>"ASC"));
+        
+        while($paySysArr = $db_ptype->Fetch()){
+        for($i=0; $i<count($paySysArr); $i++){
+            $name = $paySysArr['NAME'];
+         if($name == 'WayForPay')
+             $needed = $paySysArr['ID']; 
+              break;         
+        }
+              
+        }
+        //echo $needed; die;
+        $connection = Bitrix\Main\Application::getConnection();
+        $sqlHelper = $connection->getSqlHelper();
+        $query = "SELECT PARAMS from b_sale_pay_system_action WHERE PAY_SYSTEM_ID = ".$needed;
+        $result = $connection->query($query);
+        //print_r($result); die;
+        while ($record = $result->fetch())
+            {
+             $credents = unserialize($record['PARAMS']);                        
+            }
+            //print_r($credents); die;
+        $merch = $credents['W4P_MERCHANT']['VALUE'];
+       
+        $this->secret_key = 'flk3409refn54t54t*FNJRET';//$credents['W4P_SECURE_KEY']['VALUE'];        
+        //print_r($this->key); die;
+        $widgetFields = array();        
+        $widgetFields['merchantAccount'] = 'test_merch_n1';//CSalePaySystemAction::GetParamValue("W4P_MERCHANT");//$merch;
+ 
+        $widgetFields['orderReference'] = "W4P_widget_".time();
+        $widgetFields['orderDate'] = time();
+        $widgetFields['merchantAuthType'] = 'simpleSignature';
+        $widgetFields['merchantDomainName'] = $_SERVER['HTTP_HOST'];
+        $widgetFields['merchantTransactionSecureType'] = 'AUTO';
+        $widgetFields['currency'] = $CurProd;
+        $widgetFields['amount'] = round($PriceProd,2);               
+        $widgetFields['productName'] = $NameProd;
+        $widgetFields['productPrice'] = round($PriceProd,2);//?
+        $widgetFields['productCount'] = 1;        
+        $widgetFields['clientFirstName'] = 'Buyer';
+        $widgetFields['clientLastName'] = 'Payer';       
+        $widgetFields['clientPhone'] = '380000000000';
+        $widgetFields['merchantSignature'] = $this->getRequestSignature($widgetFields);
+        
+        $this->setWidget($widgetFields); 
+        
+    }
+    
+    public function setWidget($arr)
+        {                   
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+                <script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+<script type="text/javascript">
+    var wayforpay = new Wayforpay();
+    var pay = function () {       
+        
+        wayforpay.run({
+                merchantAccount : \''.$arr['merchantAccount'] .'\',
+                merchantDomainName : \''.$arr['merchantDomainName'] .'\',
+                merchantAuthType : \''.$arr['merchantAuthType'] .'\',
+                merchantSignature : \''.$arr['merchantSignature'] .'\',
+                orderReference : \''.$arr['orderReference'] .'\',
+                orderDate : \''.$arr['orderDate'] .'\',
+                amount : \''.$arr['amount'] .'\',
+                currency : \''.$arr['currency'] .'\',
+                productName : \''.$arr['productName'] .'\',
+                productPrice : \''.$arr['productPrice'] .'\',
+                productCount : \''.$arr['productCount'] .'\',
+                clientFirstName : \'Buyer\',
+                clientLastName : \'Payer\',                
+                clientPhone: \'380000000000\'
+            },
+            function (response) {
+                // on approved             
+            },
+            function (response) {
+                // on declined
+            },
+            function (response) {
+                // on pending or in processing
+            }
+        );    
+
+    }
+    
+    jQuery(document).ready(function(){
+    jQuery(\'#wfpay\').click(function(){
+    pay();
+    });
+    });
+    
+</script>';
+        }
+///////////////////////////
+
+    /**
+     * @param $options
+     *
+     * @return string
+     */
+    public function getRequestSignature($options)
+    {
+        return $this->getSignature($options, $this->keysForSignature);
+    }
+
+    /**
+     * @param $options
+     *
+     * @return string
+     */
+    public function getResponseSignature($options)
+    {
+        return $this->getSignature($options, $this->keysForResponseSignature);
+    }
+
+
+    /**
+     * @param $response
+     * @return bool|string
+     */
+    public function isPaymentValid($response)
+    {
+        $sign = $this->getResponseSignature($response);
+        if ($sign != $response['merchantSignature']) {
+            return 'An error has occurred during payment. Signature is not valid.';
+        }
+        if ($response['transactionStatus'] != self::WAYFORPAY_TRANSACTION_APPROVED) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param $data
+     *
+     * @return string
+     */
+    public function getAnswerToGateWay($data)
+    {
+        $time = time();
+        $responseToGateway = array(
+            'orderReference' => $data['orderReference'],
+            'status'         => 'accept',
+            'time'           => $time
+        );
+        $sign = array();
+        foreach ($responseToGateway as $dataKey => $dataValue) {
+            $sign [] = $dataValue;
+        }
+        $sign = implode(self::WAYFORPAY_SIGNATURE_SEPARATOR, $sign);
+	//print_r($this->secret_key); die;
+        $sign = hash_hmac('md5', $sign, $this->secret_key);
+        $responseToGateway['signature'] = $sign;
+
+        return json_encode($responseToGateway);
+    }
+
+    protected function getRequest()
+    {
+        return json_decode(file_get_contents("php://input"), true);
+    }
+}
+
+Огульчанский Д.О., ФЛП 
++380 98–544–26–36 +380 50–630–22–05  ) 
+Бджолоагросервіс, ПрАТ 
+ +380 67–522–86–81 +380 (56) 765–01–25 +380 95–779–51–99 www.p-agro.com.ua )
+
+
+<div id="conts" class="col-sm-10 col-xs-12" style="padding-top: 26px; padding-left: 15px;">
+<h4>Контактная информация</h4>
+<table>
+<tbody>
+<tr>
+<td style="border: 1px solid; font-weight: bold; font-size: 14px;">Днепр, пр. Д. Яворницкого, 121</td>
+<td style="border: 1px solid; font-weight: bold; font-size: 14px;">Днепр, пр. Слобожанский, 83</td>
+<td style="border: 1px solid; font-weight: bold; font-size: 14px;">Днепр, ул. Европейская, 10</td>
+</tr>
+<tr>
+<td style="border: 1px solid; font-weight: bold; font-size: 14px; text-align: center;">+38097114-09-18<br />+38095794-65-82<br />+38000000-00-00</td>
+<td style="border: 1px solid; font-weight: bold; font-size: 14px; text-align: center;">+38096597-68-62<br />+38066178-28-89<br />+38093045-66-80</td>
+<td style="border: 1px solid; font-weight: bold; font-size: 14px; text-align: center;">+38000000-00-00<br />+38000000-00-00<br />+38000000-00-00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script>jQuery('#footer').append("<a href='#'><div style='position:fixed; bottom:0; right:0; background:#00DF00; opacity:0.5; width:3%; height:3%; text-align:center;' >UP</div></a>");</script>
+
+
+
+<style>.footer-container{
+background:#fff;
+}
+.footer-container:before {
+ content:'';
+ position:absolute;
+ background:#118111;
+ top:0; bottom:0; 
+ height:13%; 
+width: 100%;
+z-index:0;
+}
+.footer-container .footer-block 
+{
+padding-top:0 !important;
+}
+.footer-container #footer .bottom-footer div
+{
+border: none;
+}
+.footer-container #footer:before {
+ background: none;
+}
+.footer-container h4
+{
+display: inline-block;
+border-bottom: 2px solid;
+margin-bottom:0 !important;
+}
+.footer-container ul
+{
+padding-top: 15%;
+}</style>
+<div class="row" style="clear: both; padding-top: 20px;">
+<div class="col-sm-4">Интернет-магазин(пр. Слобожанский, 83/3)<br /> 096597-68-62, 066178-28-89</div>
+<div class="col-sm-4">пр. Д. Яворницкого 121<br /> 097114-09-18, 095794-65-82</div>
+<div class="col-sm-4">ул. Европейская 10A<br /> 000000-00-00, 000000-00-00</div>
+</div>
+<script>jQuery('#footer').append("<a href='#'><div style='position:fixed; bottom:0; right:0; background:#00DF00; opacity:0.5; width:3%; height:3%; text-align:center;' >UP</div></a>");
+jQuery('#footer .footer-block').removeClass('col-sm-2').addClass('col-sm-4');</script>
+
+
+$doc = new DOMDocument();
+			$doc->validateOnParse = false; 
+			$doc->loadHTML(the_content());
+			$sections = $doc->getElementsByTagName('section');
+			////echo $divs->item(0)->textContent;
+			foreach($sections as $section){
+
+			$containers = $section->getElementsByTagName('div');			
+
+			if(strpos($containers[0]->getAttribute('class'), 'container') !== false){
+
+			$tmp_dom = '<div class="row">
+				<div class="col-md-6">	
+					<div class="breadcrumbs">'.
+									
+        					bcn_display().
+    										
+					'</div>
+				</div>
+			</div>';
+
+			$containers[0]->appendChild($tmp_dom);
+			}
+			}

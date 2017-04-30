@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\UsersProjects */
 
-$this->title = 'Create Users Projects';
+$this->title = 'Attach or Detach User to a Project';
 $this->params['breadcrumbs'][] = ['label' => 'Users Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

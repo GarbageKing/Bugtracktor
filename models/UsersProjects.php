@@ -70,10 +70,13 @@ class UsersProjects extends \yii\db\ActiveRecord
     {
         if(parent::beforeSave($insert))
         {
-            if($this->isNewRecord && preg_match("/[a-z]/i", $this->id_user))
+            if($this->isNewRecord && preg_match("/[а-яёa-z]/i", $this->id_user))
             { 
                 
             $Users = Users::find()->where(['username' => $this->id_user])->all();
+            
+            if(!$Users)
+                die( '<script>alert("There is no user with this username!"); window.location.href="?r=issues";</script>');
             
             $ids = [];
             

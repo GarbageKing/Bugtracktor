@@ -105,7 +105,7 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
             [['username', 'password'], 'required'],
             [['cr_date'], 'safe'],
             [['username', 'email'], 'string', 'max' => 100],
-            [['password', 'auth_key'], 'string', 'max' => 40],
+            [['password', 'auth_key'], 'string', 'max' => 64],
         ];
     }
 
@@ -143,6 +143,8 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
     {
         if(parent::beforeSave($insert))
         {
+            if($this->isNewRecord)
+            {
             $exists = Users::find()->where( [ 'username' => $this->username ] )->exists();
             $exists2 = Users::find()->where( [ 'email' => $this->email ] )->exists();
             if($exists){                
@@ -152,13 +154,13 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
             if($exists2){
                 echo '<script>alert("User with this email already exists");</script>';
                 return;
+            }          
+            
             }
             
-            if($this->isNewRecord)
-            { 
             $this->password = Yii::$app->security->generatePasswordHash($this->password);
             $this->auth_key = Yii::$app->security->generateRandomString();
-            }
+            
             return parent::beforeSave($insert);
             
             

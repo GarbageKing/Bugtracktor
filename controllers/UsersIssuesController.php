@@ -88,7 +88,8 @@ class UsersIssuesController extends Controller
         else {             
             
         if ($model->load(Yii::$app->request->post())) {   
-                                 
+                       
+            
             if(Yii::$app->session['idissue'])
             {$model->id_issue = Yii::$app->session['idissue'];}
             else 
@@ -107,9 +108,10 @@ class UsersIssuesController extends Controller
             $model2->is_creator = 0;
             $model2->save();
             
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(Yii::$app->session['prevurl']);
         } else {            
-                               
+                       
+            Yii::$app->session['prevurl'] = Yii::$app->request->referrer;
             $arr = explode('id=', Yii::$app->request->referrer); 
             if(count($arr)<2)
             {return;}
@@ -126,25 +128,6 @@ class UsersIssuesController extends Controller
             else 
             {return '<script>alert("Only a creator of an issue can manage connections!"); window.location.href=document.referrer;</script>'; }  
         }
-        }
-    }
-
-    /**
-     * Updates an existing UsersIssues model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
     }
 

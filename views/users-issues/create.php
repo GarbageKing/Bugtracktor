@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\UsersIssues */
 
-$this->title = 'Create Users Issues';
+$this->title = 'Attach or Detach User to an Issue';
 $this->params['breadcrumbs'][] = ['label' => 'Users Issues', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

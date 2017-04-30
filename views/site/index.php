@@ -16,15 +16,23 @@ $this->title = 'My Yii Application';
 
         <div class="row">
             <div class="col-sm-6">
-                <h2><?= (Yii::$app->user->getId() ? 'Projects' : 'LogIn');  ?></h2>                
-
-                <p><a class="btn btn-default" href="<?= (Yii::$app->user->getId() ? '?r=projects' : '?r=site%2Flogin');  ?>">Go</a></p>
+                <h2><a  href="<?= (Yii::$app->user->getId() ? '?r=projects' : '?r=site%2Flogin');  ?>">
+        <?= (Yii::$app->user->getId() ? 'Projects' : 'LogIn');  ?>
+                </a></h2>            
             </div>
             <div class="col-sm-6">
-                <h2><?= (Yii::$app->user->getId() ? 'Issues' : 'SignUp');  ?></h2>
-
-                <p><a class="btn btn-default" href="<?= (Yii::$app->user->getId() ? '?r=issues' : '?r=site%2Fregister');  ?>">Go</a></p>
-            </div>            
+                <h2><a href="<?= (Yii::$app->user->getId() ? '?r=issues' : '?r=users%2Fcreate');  ?>">
+        <?= (Yii::$app->user->getId() ? 'Issues' : 'SignUp');  ?>
+                </a></h2>
+                
+            </div>  
+            <?php if(Yii::$app->user->getId()){ ?>
+            <div class="col-sm-offset-3 col-sm-6">
+                <h2><a href="<?= '?r=users%2Fupdate&id='.Yii::$app->user->getId();  ?>">
+                Update Your Profile
+                </a></h2>                
+            </div>   
+            <?php } ?>
         </div>
 
     </div>

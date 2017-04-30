@@ -93,21 +93,6 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-    
-    public function actionRegister()
-    {
-        $model = new Users();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            return $this->redirect(/*['view', 'id' => $model->id]*/'');
-        } else {
-            return $this->render('register', [
-                'model' => $model,
-            ]);
-        }
-    }
-    
+    }   
     
 }

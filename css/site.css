@@ -1,0 +1,266 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+/*My Styles*/
+
+.navbar-brand img
+{
+    height:100%;
+    width: auto;
+}
+
+.site-index .body-content
+{
+    text-align: center;
+}
+
+body, footer 
+{
+    background-color: #190629 !important;
+    color: #977cad;
+    border: 0 !important;
+}
+
+h1,h2,h3,h4,h5
+{
+    color: #00BDF4 !important;
+}
+
+.hf-divider
+{
+    height: 5px;
+    background-image: linear-gradient(90deg,#8823de,#0ec1f6);
+}
+
+.navbar
+{
+    margin-bottom: 0; 
+}
+
+.site-index a
+{
+    color: #00BDF4 !important;
+}
+
+.site-index a:hover
+{
+    text-decoration: none;
+    border-bottom: 4px solid #00BDF4;
+}
+
+table, th, td
+{
+    border: 1px solid #29BAA5 !important;
+}
+
+.btn-success, .btn-success:active, .btn-success:focus
+{
+    background-color: #29BAA5 !important;
+    border-color: #2e9e8e !important;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:focus
+{
+    background-color: #005fb1 !important;
+    border-color: #0f5796 !important;
+}
+
+.btn-danger, .btn-danger:active, .btn-danger:focus
+{
+    background-color: #e812b0 !important;
+}
+
+.btn-success:hover
+{
+    background-color: #189c89 !important;    
+}
+
+.btn-primary:hover
+{
+    background-color: #035398 !important;   
+}
+
+.btn-danger:hover
+{
+    background-color: #9c0c77 !important;
+}
+
+.form-control
+{
+    background-color: rgba(255, 255, 255, 0);
+    color: #977cad;
+    border: 1px solid #29BAA5;
+}
+
+.redactor-editor, .redactor-box
+{
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid #29BAA5;    
+}
+
+.issues-index .row:nth-child(1) .btn-success,h1
+{
+    display: inline-block; 
+}
+
+.issues-index .row:nth-child(1) .btn-success
+{
+    float: right;    
+}
+
+.projects-index .row:nth-child(1) .btn-success,h1
+{
+    display: inline-block; 
+}
+
+.projects-index .row:nth-child(1) .btn-success
+{
+    float: right;    
+}
+
+.breadcrumb
+{
+    background-color: #190629;
+}
+
+#issue-info img
+{
+    height: 300px;
+    width: auto;
+}
+
+#ui-datepicker-div, .ui-datepicker-calendar
+{
+    background-color: #190629 !important;
+    color: #977cad;
+}
+
+.ui-state-default, .ui-datepicker-header, .ui-widget-content 
+{
+    background: #190629 !important;
+    border: 1px solid #29BAA5 !important;
+    color: #977cad;
+}
+
+.redactor-toolbar
+{
+    background: #190629 !important;    
+}
+
+.redactor-toolbar li a
+{
+    color: #977cad;
+}

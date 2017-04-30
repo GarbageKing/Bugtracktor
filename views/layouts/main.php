@@ -18,8 +18,9 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Bugtracktor</title>
     <?php $this->head() ?>
+    <link rel="shortcut icon" type="image/png" href="img/bugtracktor1.png"/>    
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -31,7 +32,7 @@ AppAsset::register($this);
         'brandLabel' => Html::img('@web/img/bugtracktor.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-fixed-top',
+            'class' => 'navbar',
         ],
     ]);
     echo Nav::widget([
@@ -51,20 +52,27 @@ AppAsset::register($this);
             )
         ],
     ]);
-    NavBar::end();
+    NavBar::end();    
     ?>
+    
+    <div class="hf-divider"></div>
 
     <div class="container">
         
+        <?php if (!strpos($_SERVER['REQUEST_URI'],'users-issues')&&!strpos($_SERVER['REQUEST_URI'],'users-projects')) {?>
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
+        <?php }?>
         <?= $content ?>
+        
     </div>
 </div>
 
+    <div class="hf-divider"></div>
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; Garbage_kinG <?= date('Y') ?></p>        
     </div>
 </footer>
 

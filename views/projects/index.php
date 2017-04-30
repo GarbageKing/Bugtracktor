@@ -12,15 +12,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="projects-index">
 
-    <h1>Projects creation page</h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Projects', ['create'], ['class' => 'btn btn-success']) ?>        
-    </p>
+    <div class="row">
+    <div class="col-sm-12">
+    <h1>Projects attached to you</h1>    
+        <?= Html::a('Create New', ['create'], ['class' => 'btn btn-success']) ?>     
+    </div>
+    </div>    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => [
+            'class' => 'table table-bordered'
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

@@ -16,8 +16,8 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'id_user')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::submitButton('Delete', ['class' => 'btn btn-danger',  'name' => 'delete-linking']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Attach' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Detach', ['class' => 'btn btn-danger',  'name' => 'delete-linking']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

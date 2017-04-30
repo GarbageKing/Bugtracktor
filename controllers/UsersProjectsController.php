@@ -96,9 +96,10 @@ class UsersProjectsController extends Controller
             
             $model->save();
             
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(Yii::$app->session['prevurlpr']);
         } else {    
             
+            Yii::$app->session['prevurlpr'] = Yii::$app->request->referrer;
             $arr = explode('id=', Yii::$app->request->referrer);
             $ids = $arr[1];
             Yii::$app->session['idproject'] = $ids;
@@ -114,35 +115,6 @@ class UsersProjectsController extends Controller
             else 
                 {return '<script>alert("Only a creator of a project can manage connections!"); window.location.href=document.referrer;</script>';}
         }
-        }
-    }
-
-    /**
-     * Updates an existing UsersProjects model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            
-            $UsersProjects = UsersProjects::find()->where(['id_user' => Yii::$app->user->getId(), 'is_creator' => 1])->all();
-            $ids = [];
-            
-            foreach($UsersProjects as $project)
-            {
-                $ids[] = $project['id_projects'];
-            }
-            
-            return $this->render('update', [
-                'model' => $model,
-                'projects' => Projects::find()->where(['id' => $ids])->all(),
-            ]);
         }
     }
 
