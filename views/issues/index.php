@@ -24,6 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'tableOptions' => [
             'class' => 'table table-bordered'
         ],
+        'rowOptions'=>function($model){
+            if($model->status == 0){
+                return ['style' => 'opacity: 0.5;
+                filter: alpha(opacity=50);'];
+            }
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -42,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'description',
                 'value'     => function ($model) {
                 if(mb_strlen($model->description)>=50)
-                return substr($model->description, 0, 50).'...';
+                return mb_substr($model->description, 0, 50).'...';
                 return $model->description;
                 }
             ],
